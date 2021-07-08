@@ -19,13 +19,13 @@ export const NavBar = (props) => {
 };
 
 const FlexBar = styled.div`
+  background: azure;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;
   align-items: flex-end;
-  padding: 2rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.5rem;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
   margin: 0;
 `;
 
