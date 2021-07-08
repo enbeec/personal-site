@@ -15,6 +15,7 @@
 - [ ] projects section
 	- [ ] dynamic list component
 	- [ ] projects imported from config
+- [ ] customize `public/`
 
 ## Git Workflow
 
