@@ -4,17 +4,17 @@
 
 ### Version 1/MVP
 
--[x] naive config module (a single js file exporting an object called `config`)
--[x] nav bar
-	-[x] Home, Blog, Links
-	-[x] all leading back to "/" for now
--[x] about section
-	-[x] picture (github avatar using github username from config)
-	-[x] name
-	-[x] bio
--[ ] projects section
-	-[ ] dynamic list component
-	-[ ] projects imported from config
+- [x] naive config module (a single js file exporting an object called `config`)
+- [x] nav bar
+	- [x] Home, Blog, Links
+	- [x] all leading back to "/" for now
+- [x] about section
+	- [x] picture (github avatar using github username from config)
+	- [x] name
+	- [x] bio
+- [ ] projects section
+	- [ ] dynamic list component
+	- [ ] projects imported from config
 
 ## Git Workflow
 
