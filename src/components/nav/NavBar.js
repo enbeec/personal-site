@@ -40,8 +40,10 @@ const BarLink = styled(NavLink)`
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px black;
   border-top-left-radius: 20px;
   text-decoration: none;
+  transition: transform 500ms;
   :link {
     text-decoration: none;
   }
@@ -55,5 +57,17 @@ const BarLink = styled(NavLink)`
   }
   &.activeLink {
     background: lightgrey;
+
+    animation: MoveUpDown 840ms ease-in-out infinite;
+
+    @keyframes MoveUpDown {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(5px);
+      }
+    }
   }
 `;

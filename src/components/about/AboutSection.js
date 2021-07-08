@@ -1,7 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import Collapsible from "react-collapsible";
+import styled, { css } from "styled-components";
 import { config } from "../../config";
 
+// see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
 export const AboutSection = (props) => {
   return (
     <AboutContainer>
@@ -13,7 +15,15 @@ export const AboutSection = (props) => {
       </AvatarContainer>
       <AboutTextContainer>
         <AboutName>{config.about.name}</AboutName>
-        <AboutBio>{config.about.bio}</AboutBio>
+        <Collapsible
+          trigger={
+            <AboutText>
+              {config.about.info} <AboutTextExpandText />
+            </AboutText>
+          }
+        >
+          <AboutText>{config.about.bio}</AboutText>
+        </Collapsible>
       </AboutTextContainer>
     </AboutContainer>
   );
@@ -44,9 +54,27 @@ const AboutName = styled.div`
   font-size: 2rem;
 `;
 
-const AboutBio = styled.div`
+const AboutText = styled.div`
   font-style: Oblique;
   font-size: 1.1rem;
+  ${(props) =>
+    props.right &&
+    css`
+      text-align: right;
+    `}
+  ${(props) =>
+    props.center &&
+    css`
+      text-align: center;
+    `}
+`;
+
+const AboutTextExpandText = styled.span`
+  ${AboutText}:hover & {
+    ::after {
+      content: "... click to show/hide...";
+    }
+  }
 `;
 
 const AvatarContainer = styled.div`
