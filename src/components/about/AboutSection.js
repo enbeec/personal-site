@@ -28,10 +28,12 @@ const AboutContainer = styled.div`
   margin: 0;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  min-width: 30rem;
 `;
 
 const AboutTextContainer = styled.div`
-  padding-left: 4rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -49,6 +51,7 @@ const AboutBio = styled.div`
 
 const AvatarContainer = styled.div`
   margin-top: 4rem;
+  margin-left: 2rem;
   box-sizing: border-box;
   border-radius: 50%;
   border: 2px solid #ddd;

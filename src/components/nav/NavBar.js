@@ -19,7 +19,9 @@ export const NavBar = (props) => {
 };
 
 const FlexBar = styled.div`
-  background: azure;
+  position: sticky;
+  top: 0;
+  background: lightskyblue;
   display: flex;
   flex-wrap: nowrap;
   justify-content: space-around;
@@ -27,6 +29,7 @@ const FlexBar = styled.div`
   padding-top: 1.6rem;
   padding-bottom: 1.6rem;
   margin: 0;
+  box-shadow: 0px 2px 2px 2px darkgrey;
 `;
 
 const BarLink = styled(NavLink)`
