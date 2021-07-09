@@ -1,6 +1,6 @@
 import React from "react";
 import { AboutSection } from "./about/AboutSection";
-import { ProjectsSection } from "./projects/ProjectsSection";
+import { ProjectBoard } from "./projects/ProjectBoard";
 import { NavBar } from "./nav/NavBar";
 
 export const MySite = (props) => {
@@ -10,7 +10,7 @@ export const MySite = (props) => {
       <div style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
         <AboutSection />
       </div>
-      <ProjectsSection />
+      <ProjectBoard />
     </>
   );
 };

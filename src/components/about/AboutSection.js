@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Collapsible from "react-collapsible";
 import styled, { css } from "styled-components";
 import { config } from "../../config";
@@ -43,8 +43,8 @@ const AboutContainer = styled.div`
 `;
 
 const AboutTextContainer = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 4rem;
+  padding-right: 8rem;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -82,7 +82,7 @@ const AboutTextExpandText = styled.span`
 `;
 
 const AvatarContainer = styled.div`
-  margin-top: 4rem;
+  margin-top: 1rem;
   margin-left: 2rem;
   box-sizing: border-box;
   border-radius: 50%;

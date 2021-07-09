@@ -1,7 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { useDrag, useDrop } from "react-dnd";
-import { config } from "../../config";
+import { useDrop } from "react-dnd";
 import { Project } from "./Project";
 import update from "immutability-helper";
 
@@ -61,4 +60,13 @@ export const ProjectBoard = (props) => {
 
 const ProjectContainer = styled.div`
   cursor: pointer;
+  border: 1px dotted black;
+  background: aquamarine;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 2rem;
+  min-height: 40rem;
+  box-shadow: 0px 2px 2px 2px darkgrey;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
 `;

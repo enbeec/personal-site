@@ -1,6 +1,8 @@
-import React, { useRef } from "react";
-import styled, { css } from "styled-components";
+import React from "react";
+import styled from "styled-components";
 import { useDrag } from "react-dnd";
+import { MoveAndShake } from "../../styling/animations";
+import { config } from "../../config";
 
 export const Project = ({ id, left, top, children }) => {
   // all four of thes colors look groovy with aquamarine
@@ -25,58 +27,27 @@ export const Project = ({ id, left, top, children }) => {
       isDragging={isDragging}
       style={{ left, top }}
     >
-      {children}
+      <div
+        style={{
+          padding: "2rem",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <span>{children}</span>
+        <p />
+        <span>{"top coordinate: " + top}</span>
+        <span>{"left coordinate: " + left}</span>
+      </div>
     </ProjectCard>
   );
 };
 
-const draggingAnimation = css`
-  animation: MoveAndShake 1.2s ease infinite;
-  @keyframes MoveAndShake {
-    0% {
-      transform: translate(1px, 1px) rotate(0deg);
-    }
-    10% {
-      transform: translate(-1px, -2px) rotate(-1deg);
-    }
-    20% {
-      transform: translate(-3px, 0px) rotate(1deg);
-    }
-    30% {
-      transform: translate(3px, 2px) rotate(0deg);
-    }
-    40% {
-      transform: translate(1px, -1px) rotate(1deg);
-    }
-    50% {
-      transform: translate(-1px, 2px) rotate(-1deg);
-    }
-    60% {
-      transform: translate(-3px, 1px) rotate(0deg);
-    }
-    70% {
-      transform: translate(3px, 1px) rotate(-1deg);
-    }
-    80% {
-      transform: translate(-1px, -1px) rotate(1deg);
-    }
-    90% {
-      transform: translate(1px, 2px) rotate(0deg);
-    }
-    100% {
-      transform: translate(1px, -2px) rotate(-1deg);
-    }
-  }
-`;
-
 const ProjectCard = styled.div`
-  ${({ isDragging }) => isDragging && draggingAnimation}
+  ${({ isDragging }) => isDragging && MoveAndShake}
   background: ${(props) => props.bg};
   border-radius: 2px;
   text-align: center;
-  padding: 4rem;
-  width: 18rem;
-  height: 12rem;
   box-shadow: 1px 1px 1px 1px darkgrey;
   transition: box-shadow 200ms ease-in-out;
   cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
@@ -84,4 +55,6 @@ const ProjectCard = styled.div`
     box-shadow: 2px 2px 2px 2px black;
   }
   position: relative;
+  width: ${config.site.projectBoard.cardRemWidth}rem;
+  height: ${config.site.projectBoard.cardRemHeight}rem;
 `;
