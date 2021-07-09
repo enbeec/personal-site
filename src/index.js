@@ -2,12 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { MySite } from "./components/MySite";
 import { BrowserRouter as Router } from "react-router-dom";
-import reportWebVitals from "./reportWebVitals";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { DndProvider } from "react-dnd";
+// import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <MySite />
+      <DndProvider backend={HTML5Backend}>
+        <MySite />
+      </DndProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

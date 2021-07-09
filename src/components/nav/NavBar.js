@@ -30,6 +30,8 @@ const FlexBar = styled.div`
   padding-bottom: 1.6rem;
   margin: 0;
   box-shadow: 0px 2px 2px 2px darkgrey;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 `;
 
 const BarLink = styled(NavLink)`
@@ -58,9 +60,11 @@ const BarLink = styled(NavLink)`
   &.activeLink {
     background: lightgrey;
 
-    animation: MoveUpDown 840ms ease-in-out infinite;
+    ${FlexBar}:hover & {
+      animation: Bounce 840ms ease-out infinite;
+    }
 
-    @keyframes MoveUpDown {
+    @keyframes Bounce {
       0%,
       100% {
         transform: translateY(0);
