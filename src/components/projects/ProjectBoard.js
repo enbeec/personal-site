@@ -60,7 +60,6 @@ export const ProjectBoard = (props) => {
 
 const ProjectContainer = styled.div`
   cursor: pointer;
-  border: 1px dotted black;
   background: aquamarine;
   margin: 0;
   padding-top: 0;
