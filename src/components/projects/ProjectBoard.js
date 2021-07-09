@@ -8,6 +8,8 @@ import update from "immutability-helper";
 export const ProjectBoard = (props) => {
   // HARDCODED PROJECTS
   // TODO figure out randomization of positions
+  /**
+   */
   const [projects, setProjects] = useState({
     a: { top: 20, left: 80, title: "Project A" },
     b: { top: 40, left: 20, title: "Project B" },
@@ -44,7 +46,7 @@ export const ProjectBoard = (props) => {
   );
 
   return (
-    <div ref={drop}>
+    <ProjectContainer ref={drop}>
       {Object.keys(projects).map((key) => {
         const { left, top, title } = projects[key];
         return (
@@ -53,6 +55,10 @@ export const ProjectBoard = (props) => {
           </Project>
         );
       })}
-    </div>
+    </ProjectContainer>
   );
 };
+
+const ProjectContainer = styled.div`
+  cursor: pointer;
+`;

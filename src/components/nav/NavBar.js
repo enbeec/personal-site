@@ -55,8 +55,7 @@ const BarLink = styled(NavLink)`
   :hover {
     cursor: pointer;
   }
-  :active {
-  }
+
   &.activeLink {
     background: lightgrey;
 

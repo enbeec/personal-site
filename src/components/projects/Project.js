@@ -75,12 +75,12 @@ const ProjectCard = styled.div`
   border-radius: 2px;
   text-align: center;
   padding: 4rem;
-  width: 300px;
-  height: 200px;
+  width: 18rem;
+  height: 12rem;
   box-shadow: 1px 1px 1px 1px darkgrey;
   transition: box-shadow 200ms ease-in-out;
+  cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
   :hover {
-    cursor: pointer;
     box-shadow: 2px 2px 2px 2px black;
   }
   position: relative;

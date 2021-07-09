@@ -18,7 +18,8 @@ export const AboutSection = (props) => {
         <Collapsible
           trigger={
             <AboutText>
-              {config.about.info} <AboutTextExpandText />
+              {config.about.info}
+              <br /> <AboutTextExpandText />
             </AboutText>
           }
         >
@@ -70,6 +71,9 @@ const AboutText = styled.div`
 `;
 
 const AboutTextExpandText = styled.span`
+  color: darkgrey;
+  margin-left: 4rem;
+  margin-right: 4rem;
   ${AboutText}:hover & {
     ::after {
       content: "... click to show/hide...";
