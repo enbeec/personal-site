@@ -1,8 +1,15 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import styled from "styled-components";
 import { useDrop } from "react-dnd";
-import { Project } from "./Project";
+import { Project, ProjectCard } from "./Project";
 import update from "immutability-helper";
+import { useWindowWidth } from "@react-hook/window-size";
+import { config } from "../../config";
+
+/**
+ * DRAG AND DROP (aka DND) PRIMER:
+ * lol fuck this im rewriting it with absolute posititons
+ */
 
 export const ProjectBoard = (props) => {
   // HARDCODED PROJECTS
@@ -10,9 +17,47 @@ export const ProjectBoard = (props) => {
   /**
    */
   const [projects, setProjects] = useState({
-    a: { top: 20, left: 80, title: "Project A" },
-    b: { top: 40, left: 20, title: "Project B" },
+    a: { top: 20, left: 180, title: "Project A" },
+    b: { top: 40, left: 120, title: "Project B" },
   });
+
+  const boardWidth = useWindowWidth();
+  const convertRemToPixels = (rem) => {
+    return rem * parseFloat(getComputedStyle(document.body).fontSize);
+  };
+
+  const randomLeft = useCallback(
+    () =>
+      Math.random() *
+      (boardWidth - convertRemToPixels(config.site.projectBoard.cardRemWidth)),
+    [boardWidth]
+  );
+
+  // every time we add a project the relative top needs to go down
+  //  I want that behavior separate from randomTop
+  const [dynamicPostsCount, setDynamicPostsCount] = useState(0);
+
+  const zeroTop = useCallback(() => {
+    return (
+      0 -
+      dynamicPostsCount *
+        convertRemToPixels(config.site.projectBoard.cardRemHeight)
+    );
+  }, [dynamicPostsCount]);
+
+  const randomTop = useCallback(
+    () => Math.random() * zeroTop(),
+    [dynamicPostsCount]
+  );
+
+  const addProject = useCallback(() => {
+    setDynamicPostsCount(dynamicPostsCount + 1);
+    const project = `dynamicProject${dynamicPostsCount}`;
+    setProjects({
+      ...projects,
+      [project]: { top: randomTop(), left: randomLeft(), title: project },
+    });
+  }, [projects, setProjects, setDynamicPostsCount]);
 
   const moveProject = useCallback(
     (id, left, top) => {
@@ -46,6 +91,28 @@ export const ProjectBoard = (props) => {
 
   return (
     <ProjectContainer ref={drop}>
+      {/* TODO extend ProjectCard the right way */}
+      <ProjectCard
+        style={{
+          position: "fixed",
+          bottom: 5,
+          background: "grey",
+          height: "2.5rem",
+          width: "10rem",
+          cursor: "copy",
+        }}
+      >
+        <button
+          onClick={addProject}
+          style={{
+            margin: "0.5rem",
+            paddingRight: "1.5rem",
+            paddingLeft: "1.5rem",
+          }}
+        >
+          New Project
+        </button>
+      </ProjectCard>
       {Object.keys(projects).map((key) => {
         const { left, top, title } = projects[key];
         return (

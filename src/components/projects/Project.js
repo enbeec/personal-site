@@ -4,7 +4,7 @@ import { useDrag } from "react-dnd";
 import { MoveAndShake } from "../../styling/animations";
 import { config } from "../../config";
 
-export const Project = ({ id, left, top, children }) => {
+export const Project = ({ id, left, top, children, noDrag }) => {
   // all four of thes colors look groovy with aquamarine
   const colors = ["#DEB8FF", "#F9C453", "#9EB9FF", "#FF9F70"];
   // color is random each render
@@ -20,6 +20,7 @@ export const Project = ({ id, left, top, children }) => {
     }),
     [id, left, top]
   );
+
   return (
     <ProjectCard
       bg={colors[colorIndex]}
@@ -43,7 +44,7 @@ export const Project = ({ id, left, top, children }) => {
   );
 };
 
-const ProjectCard = styled.div`
+export const ProjectCard = styled.div`
   ${({ isDragging }) => isDragging && MoveAndShake}
   background: ${(props) => props.bg};
   border-radius: 2px;
