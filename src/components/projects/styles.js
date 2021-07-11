@@ -24,7 +24,7 @@ export const ProjectCard = styled.div`
 
 export const ProjectContainer = styled.div`
   cursor: pointer;
-  background: linear-gradient(aquamarine, aquamarine, white);
+  background: linear-gradient(aquamarine 0%, aquamarine 80%, white 100%);
   margin: 0;
   margin-bottom: auto;
   padding-top: 0;
