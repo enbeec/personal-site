@@ -1,7 +1,8 @@
 import { css } from "styled-components";
 
-export const MoveAndShake = css`
-  animation: MoveAndShake 1.2s ease infinite;
+export const MoveAndShake = (speed, iterations) => css`
+  animation: MoveAndShake ${speed ? speed : "1.12s"} linear
+    ${iterations ? iterations : "infinite"};
   @keyframes MoveAndShake {
     0% {
       transform: translate(1px, 1px) rotate(0deg);

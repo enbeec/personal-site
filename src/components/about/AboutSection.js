@@ -5,25 +5,30 @@ import { config } from "../../config";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
 export const AboutSection = (props) => {
+  const toggleExpanded = () => {
+    props.setExpandedState(!props.expandedState);
+  };
   return (
     <AboutContainer>
       <AvatarContainer>
         <AvatarImage
-          src={`https://github.com/${config.github.username}.png`}
-          alt={`github avatar for user ${config.github.username}`}
+          src={`https://github.com/${config().github.username}.png`}
+          alt={`github avatar for user ${config().github.username}`}
         />
       </AvatarContainer>
       <AboutTextContainer>
-        <AboutName>{config.about.name}</AboutName>
+        <AboutName>{config().about.name}</AboutName>
         <Collapsible
+          onOpen={toggleExpanded}
+          onClose={toggleExpanded}
           trigger={
             <AboutText>
-              {config.about.info}
+              {config().about.info}
               <br /> <AboutTextExpandText />
             </AboutText>
           }
         >
-          <AboutText>{config.about.bio}</AboutText>
+          <AboutText>{config().about.bio}</AboutText>
         </Collapsible>
       </AboutTextContainer>
     </AboutContainer>
@@ -40,6 +45,7 @@ const AboutContainer = styled.div`
   padding-top: 2rem;
   padding-bottom: 2rem;
   min-width: 30rem;
+  box-shadow: 0px 0px 1px 1px darkgrey;
 `;
 
 const AboutTextContainer = styled.div`

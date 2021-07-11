@@ -60,7 +60,7 @@ const BarLink = styled(NavLink)`
     background: lightgrey;
 
     /* QUESTION can i get this to fire again if the button is clicked? */
-    animation: Bounce 840ms ease-out 30;
+    animation: Bounce 840ms ease-out 3;
 
     @keyframes Bounce {
       0%,

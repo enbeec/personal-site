@@ -1,74 +1,55 @@
-import React, { useCallback, useState, useEffect } from "react";
+import React, { useCallback, useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { useDrop } from "react-dnd";
-import { Project, ProjectCard } from "./Project";
+import { Project } from "./Project";
+import { ProjectCard, ProjectContainer } from "./styles";
 import update from "immutability-helper";
-import { useWindowWidth } from "@react-hook/window-size";
 import { config } from "../../config";
-
-/**
- * DRAG AND DROP (aka DND) PRIMER:
- * lol fuck this im rewriting it with absolute posititons
- */
+import { useRect } from "../../hooks/useRect";
 
 export const ProjectBoard = (props) => {
+  const [rect, sizeRef] = useRect(
+    props.watchVars ? props.watchVars : undefined
+  );
+
+  const configs = config();
+
+  const [coords, setCoords] = useState({
+    width: rect.width,
+    left: rect.left,
+    height: rect.height,
+    top: rect.top,
+    cardWidth: configs.site.projectBoard.cardWidth,
+    cardHeight: configs.site.projectBoard.cardHeight,
+    cardMaxLeft: rect.width - configs.site.projectBoard.cardWidth,
+    cardMaxTop: rect.height - configs.site.projectBoard.cardHeight,
+  });
+
+  const randomTop = () => Math.random() * coords.cardMaxTop;
+  const randomLeft = () => Math.random() * coords.cardMaxLeft;
+
   // HARDCODED PROJECTS
-  // TODO figure out randomization of positions
-  /**
-   */
   const [projects, setProjects] = useState({
     a: { top: 20, left: 180, title: "Project A" },
     b: { top: 40, left: 120, title: "Project B" },
   });
 
-  const boardWidth = useWindowWidth();
-  const convertRemToPixels = (rem) => {
-    return rem * parseFloat(getComputedStyle(document.body).fontSize);
-  };
-
-  const randomLeft = useCallback(
-    () =>
-      Math.random() *
-      (boardWidth - convertRemToPixels(config.site.projectBoard.cardRemWidth)),
-    [boardWidth]
-  );
-
-  // every time we add a project the relative top needs to go down
-  //  I want that behavior separate from randomTop
-  const [dynamicPostsCount, setDynamicPostsCount] = useState(0);
-
-  const zeroTop = useCallback(() => {
-    return (
-      0 -
-      dynamicPostsCount *
-        convertRemToPixels(config.site.projectBoard.cardRemHeight)
-    );
-  }, [dynamicPostsCount]);
-
-  const randomTop = useCallback(
-    () => Math.random() * zeroTop(),
-    [dynamicPostsCount]
-  );
+  const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
 
   const addProject = useCallback(() => {
-    setDynamicPostsCount(dynamicPostsCount + 1);
-    const project = `dynamicProject${dynamicPostsCount}`;
+    setDynamicProjectCount(dynamicProjectCount + 1);
+    const project = `dynamicProject${dynamicProjectCount}`;
     setProjects({
       ...projects,
       [project]: { top: randomTop(), left: randomLeft(), title: project },
     });
-  }, [projects, setProjects, setDynamicPostsCount]);
+  }, [projects, setProjects, dynamicProjectCount]);
 
   const moveProject = useCallback(
     (id, left, top) => {
       setProjects(
-        // wtf is this object...
-        // 	I need to read the immutability-helper docs
-        update(projects, {
-          [id]: {
-            $merge: { left, top },
-          },
-        })
+        // shorthand way of updating immutable data properly
+        update(projects, { [id]: { $merge: { left, top } } })
       );
     },
     [projects, setProjects]
@@ -89,50 +70,69 @@ export const ProjectBoard = (props) => {
     [moveProject]
   );
 
+  // WORKSHEET for absolute coord system bounding
+  useEffect(() => {
+    setCoords(
+      update(coords, {
+        $merge: {
+          width: rect.width,
+          left: rect.left,
+          height: rect.height,
+          top: rect.top,
+          cardWidth: configs.site.projectBoard.cardRemWidth,
+          cardHeight: configs.site.projectBoard.cardRemHeight,
+          cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
+          cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
+        },
+      })
+    );
+  }, [rect]);
+
   return (
-    <ProjectContainer ref={drop}>
-      {/* TODO extend ProjectCard the right way */}
-      <ProjectCard
-        style={{
-          position: "fixed",
-          bottom: 5,
-          background: "grey",
-          height: "2.5rem",
-          width: "10rem",
-          cursor: "copy",
-        }}
-      >
-        <button
-          onClick={addProject}
+    <div ref={sizeRef}>
+      <ProjectContainer ref={drop}>
+        {Object.keys(projects).map((key) => {
+          // all four of thes colors look groovy with aquamarine
+          const colors = ["#DEB8FF", "#F9C453", "#9EB9FF", "#FF9F70"];
+          // random colors on each render for now
+          const colorIndex = Math.floor(Math.random() * colors.length);
+          const { left, top, title } = projects[key];
+          return (
+            <Project
+              key={key}
+              id={key}
+              left={left}
+              top={top}
+              bg={colors[colorIndex]}
+            >
+              {title}
+            </Project>
+          );
+        })}
+        {/* TODO extend ProjectCard the right way */}
+        <ProjectCard
           style={{
-            margin: "0.5rem",
-            paddingRight: "1.5rem",
-            paddingLeft: "1.5rem",
+            position: "fixed",
+            bottom: 15,
+            left: 15,
+            background: "grey",
+            height: "2.5rem",
+            width: "10rem",
+            cursor: "copy",
           }}
         >
-          New Project
-        </button>
-      </ProjectCard>
-      {Object.keys(projects).map((key) => {
-        const { left, top, title } = projects[key];
-        return (
-          <Project key={key} id={key} left={left} top={top}>
-            {title}
-          </Project>
-        );
-      })}
-    </ProjectContainer>
+          <button
+            onClick={addProject}
+            style={{
+              margin: "0.5rem",
+              paddingRight: "1.5rem",
+              paddingLeft: "1.5rem",
+            }}
+          >
+            New Project
+          </button>
+        </ProjectCard>
+      </ProjectContainer>
+    </div>
   );
 };
-
-const ProjectContainer = styled.div`
-  cursor: pointer;
-  background: aquamarine;
-  margin: 0;
-  padding-top: 0;
-  padding-bottom: 2rem;
-  min-height: 40rem;
-  box-shadow: 0px 2px 2px 2px darkgrey;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
-`;
