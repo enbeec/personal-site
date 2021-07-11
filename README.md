@@ -12,14 +12,21 @@
 	- [x] picture (github avatar using github username from config)
 	- [x] name
 	- [x] bio
-- [ ] projects section
-	- [x] dynamic list component
-	- [ ] projects imported from config and rendered dynamically
+- [x] projects section
+	- [x] dynamic list component (click button to add new thing)
+	- [x] drag and drop
 - [ ] customize `public/`
 	- [x] custom text for title
 	- [ ] custom favicon
 	- [ ] custom icons
 
+### Version 2
+
+- [ ] multi backend for `react-dnd`
+- [ ] projects section
+	- [ ] projects imported from config and rendered dynamically
+	- [ ] proper z-indexing
+	
 ## Git Workflow
 
 As this is my personal project, I'm doing a lot of the initial work with small local branches and command line merges. Things like documentation **are** sometimes committed straight to main but **are not** any sort of code change. Even a config change needs to be merged in after testing.
