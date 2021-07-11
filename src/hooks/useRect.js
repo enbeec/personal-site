@@ -42,7 +42,7 @@ export const useRect = (watchVars) => {
         window.removeEventListener("resize", handleResize);
       };
     }
-  }, [ref.current, watchVars]);
+  }, [handleResize, ref, watchVars]);
 
   return [rect, ref];
 };

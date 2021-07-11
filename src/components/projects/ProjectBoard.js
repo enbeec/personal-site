@@ -1,16 +1,11 @@
-import React, { useCallback, useState, useEffect, useRef } from "react";
+import React, { useCallback, useState } from "react";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
 import { ProjectCard, ProjectContainer } from "./styles";
 import update from "immutability-helper";
 import { config } from "../../config";
-import { useRect } from "../../hooks/useRect";
 
 export const ProjectBoard = (props) => {
-  const [rect, sizeRef] = useRect(
-    props.watchVars ? props.watchVars : undefined
-  );
-
   const configs = config();
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
 
@@ -26,11 +21,11 @@ export const ProjectBoard = (props) => {
       ...projects,
       [project]: {
         top: 10,
-        left: 50 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        left: -40 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
         title: project,
       },
     });
-  }, [projects, setProjects, dynamicProjectCount]);
+  }, [projects, setProjects, dynamicProjectCount, configs]);
 
   const moveProject = useCallback(
     (id, left, top) => {
@@ -59,7 +54,7 @@ export const ProjectBoard = (props) => {
   );
 
   return (
-    <div ref={sizeRef}>
+    <div>
       <ProjectContainer ref={drop}>
         {Object.keys(projects).map((key) => {
           // all four of thes colors look groovy with aquamarine
