@@ -26,9 +26,11 @@ export const ProjectContainer = styled.div`
   cursor: pointer;
   background: aquamarine;
   margin: 0;
+  margin-bottom: auto;
   padding-top: 0;
   padding-bottom: 2rem;
   min-height: 40rem;
+  height: 100%;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px 2px darkgrey;
   border-top-right-radius: 4px;
