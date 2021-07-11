@@ -13,38 +13,6 @@ export const ProjectBoard = (props) => {
 
   const configs = config();
 
-  const [coords, setCoords] = useState({
-    width: rect.width,
-    height: rect.height,
-    offsetX: rect.left + window.scrollX,
-    offsetY: rect.top + window.scrollY,
-    cardWidth: configs.site.projectBoard.cardRemWidth,
-    cardHeight: configs.site.projectBoard.cardRemHeight,
-    cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
-    cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
-  });
-
-  // update coords
-  useEffect(() => {
-    setCoords(
-      update(coords, {
-        $merge: {
-          width: rect.width,
-          height: rect.height,
-          offsetX: rect.left + window.scrollX,
-          offsetY: rect.top + window.scrollY,
-          cardWidth: configs.site.projectBoard.cardRemWidth,
-          cardHeight: configs.site.projectBoard.cardRemHeight,
-          cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
-          cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
-        },
-      })
-    );
-  }, [rect]);
-
-  const randomTop = () => Math.random() * coords.cardMaxTop;
-  const randomLeft = () => Math.random() * coords.cardMaxLeft;
-
   // HARDCODED PROJECTS
   const [projects, setProjects] = useState({
     a: { top: 0, left: 0, title: "Project A" },
@@ -58,7 +26,7 @@ export const ProjectBoard = (props) => {
     const project = `dynamicProject${dynamicProjectCount}`;
     setProjects({
       ...projects,
-      [project]: { top: randomTop(), left: randomLeft(), title: project },
+      [project]: { top: 10, left: 160, title: project },
     });
   }, [projects, setProjects, dynamicProjectCount]);
 
@@ -79,8 +47,7 @@ export const ProjectBoard = (props) => {
         const delta = monitor.getDifferenceFromInitialOffset();
         const left = Math.round(item.left + delta.x);
         const top = Math.round(item.top + delta.y);
-        // translate absolute coords back to relative coords for storage
-        moveProject(item.id, left - coords.offsetX, top - coords.offsetY);
+        moveProject(item.id, left, top);
         // TODO look at the useDrop docs for why this is here
         return undefined;
       },
@@ -102,8 +69,8 @@ export const ProjectBoard = (props) => {
               key={key}
               id={key}
               // convert stored relative coords to absolute coords
-              left={left + coords.offsetX}
-              top={top + coords.offsetY}
+              left={left}
+              top={top}
               bg={colors[colorIndex]}
             >
               {title}
