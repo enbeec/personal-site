@@ -15,10 +15,10 @@
 - [x] projects section
 	- [x] dynamic list component (click button to add new thing)
 	- [x] drag and drop
-- [ ] customize `public/`
+- [x] customize `public/`
 	- [x] custom text for title
-	- [ ] custom favicon
-	- [ ] custom icons
+	- [x] custom favicon
+	- [x] custom icons
 
 ### Version 2
 
