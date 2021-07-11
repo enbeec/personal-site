@@ -12,7 +12,7 @@
 	- [x] picture (github avatar using github username from config)
 	- [x] name
 	- [x] bio
-- [x] projects section
+- [ ] projects section
 	- [x] dynamic list component
 	- [ ] projects imported from config and rendered dynamically
 - [ ] customize `public/`
