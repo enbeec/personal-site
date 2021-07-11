@@ -49,7 +49,7 @@ export const ButtonRow = styled.div`
   padding-right: 0.8rem;
 `;
 
-const _ButtonCard = styled(ProjectCard)`
+const ButtonCardStyled = styled(ProjectCard)`
   margin-top: 0.8rem;
   ${marginX("0.4rem")}
   cursor: pointer;
@@ -68,7 +68,7 @@ const _ButtonCard = styled(ProjectCard)`
 `;
 
 export const ButtonCard = ({ clickFn, children }) => (
-  <_ButtonCard>
+  <ButtonCardStyled>
     <button onClick={clickFn}>{children}</button>
-  </_ButtonCard>
+  </ButtonCardStyled>
 );

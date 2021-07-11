@@ -29,7 +29,7 @@ export const ProjectBoard = (props) => {
         title: project,
       },
     });
-  }, [projects, setProjects, dynamicProjectCount, configs]);
+  }, [projects, setProjects, dynamicProjectCount, configs, dropCounter]);
 
   const moveProject = useCallback(
     (id, left, top, lastDropped) => {
@@ -41,6 +41,8 @@ export const ProjectBoard = (props) => {
     [projects, setProjects]
   );
 
+  // useDrop returns collected props (ignored by destructuring here) and
+  //    the dropTarget ref which we attach to the container
   const [, drop] = useDrop(
     () => ({
       accept: "project",
@@ -53,10 +55,21 @@ export const ProjectBoard = (props) => {
         return undefined;
       },
     }),
-    [moveProject]
+    [moveProject, dropCounter]
   );
 
-  const byLastDropped = (itemA, itemB) => itemA.lastDropped > itemB.lastDropped;
+  // QUESTION: does this need to be a useCallback?
+  // incrementZ is used to allow bringing a project forward by clicking on it
+  const incrementZ = useCallback(
+    (e) => {
+      setProjects(
+        update(projects, {
+          [e.currentTarget.id]: { $merge: { lastDropped: dropCounter() } },
+        })
+      );
+    },
+    [projects, setProjects, dropCounter]
+  );
 
   return (
     <>
@@ -64,8 +77,9 @@ export const ProjectBoard = (props) => {
         {Object.keys(projects).map((key) => {
           // all four of thes colors look groovy with aquamarine
           const colors = ["#DEB8FF", "#F9C453", "#9EB9FF", "#FF9F70"];
-          // random colors on each render for now
+          // random colors on each render for now -- kinda fun :)
           const colorIndex = Math.floor(Math.random() * colors.length);
+          // this is so handy
           const { left, top, title, lastDropped } = projects[key];
           return (
             <Project
@@ -75,7 +89,9 @@ export const ProjectBoard = (props) => {
               top={top}
               zIndex={parseInt(lastDropped)}
               bg={colors[colorIndex]}
+              clickFn={incrementZ}
             >
+              {/* this is placeholder content */}
               {title}
             </Project>
           );
