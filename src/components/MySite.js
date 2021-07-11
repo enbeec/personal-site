@@ -14,7 +14,7 @@ const GlobalStyles = createGlobalStyle`
   html {
     overflow-y: hidden;
     height: 100%;
-    background: black;
+    /* background: black; */
   }
 `;
 

@@ -79,8 +79,8 @@ export const ProjectBoard = (props) => {
         <ProjectCard
           style={{
             position: "fixed",
-            bottom: 15,
-            left: 15,
+            bottom: 10,
+            left: 22,
             background: "grey",
             height: "2.5rem",
             width: "10rem",

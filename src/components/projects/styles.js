@@ -24,12 +24,14 @@ export const ProjectCard = styled.div`
 
 export const ProjectContainer = styled.div`
   cursor: pointer;
-  background: aquamarine;
+  background: linear-gradient(aquamarine, aquamarine, white);
   margin: 0;
   margin-bottom: auto;
   padding-top: 0;
   padding-bottom: 2rem;
+  position: absolute;
   min-height: 40rem;
+  width: 98%;
   height: 100%;
   box-sizing: border-box;
   box-shadow: 0px 2px 2px 2px darkgrey;
