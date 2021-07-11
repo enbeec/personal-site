@@ -2,24 +2,6 @@
 
 ## Roadmap
 
-### Version 1/MVP
-
-- [x] naive config module (a single js file exporting an object called `config`)
-- [x] nav bar
-	- [x] Home, Blog, Links
-	- [x] all leading back to "/" for now
-- [x] about section
-	- [x] picture (github avatar using github username from config)
-	- [x] name
-	- [x] bio
-- [x] projects section
-	- [x] dynamic list component (click button to add new thing)
-	- [x] drag and drop
-- [x] customize `public/`
-	- [x] custom text for title
-	- [x] custom favicon
-	- [x] custom icons
-
 ### Version 2
 
 - [ ] multi backend for `react-dnd`
