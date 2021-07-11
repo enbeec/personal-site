@@ -39,3 +39,17 @@ export const MoveAndShake = (speed, iterations) => css`
     }
   }
 `;
+
+export const Bounce = (speed, iterations) => css`
+  animation: Bounce ${speed ? speed : "840ms"} ease-out
+    ${iterations ? iterations : "infinite"};
+  @keyframes Bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(5px);
+    }
+  }
+`;
