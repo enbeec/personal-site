@@ -16,7 +16,9 @@
 	- [x] dynamic list component
 	- [ ] projects imported from config and rendered dynamically
 - [ ] customize `public/`
-
+	- [x] custom text for title
+	- [ ] custom favicon
+	- [ ] custom icons
 
 ## Git Workflow
 
