@@ -1,6 +1,26 @@
 import styled from "styled-components";
 import { MoveAndShake } from "../../styling/animations";
+import { marginX } from "../../styling/helpers";
 import { config } from "../../config";
+
+export const ProjectContainer = styled.div`
+  cursor: pointer;
+  background: linear-gradient(aquamarine 0%, aquamarine 80%, white 100%);
+  margin: 0;
+  margin-bottom: auto;
+  padding-top: 0;
+  padding-bottom: 2rem;
+  position: absolute;
+  min-height: 40rem;
+  width: 98%;
+  height: 100%;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 2px 2px darkgrey;
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  display: flex;
+  flex-flow: row;
+`;
 
 export const ProjectCard = styled.div`
   ${({ isDragging }) => isDragging && MoveAndShake()}
@@ -22,23 +42,33 @@ export const ProjectCard = styled.div`
   flex-shrink: 0;
 `;
 
-export const ProjectContainer = styled.div`
-  cursor: pointer;
-  background: linear-gradient(aquamarine 0%, aquamarine 80%, white 100%);
-  margin: 0;
-  margin-bottom: auto;
-  padding-top: 0;
-  padding-bottom: 2rem;
-  position: absolute;
-  min-height: 40rem;
-  width: 98%;
-  height: 100%;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 2px 2px darkgrey;
-  border-top-right-radius: 4px;
-  border-top-left-radius: 4px;
+export const ButtonRow = styled.div`
   display: flex;
   flex-flow: row;
+  justify-content: right;
+  padding-right: 0.8rem;
 `;
 
-export const ButtonCard = styled.div``;
+const _ButtonCard = styled(ProjectCard)`
+  margin-top: 0.8rem;
+  ${marginX("0.4rem")}
+  cursor: pointer;
+  position: relative;
+  height: 2.5rem;
+  width: auto;
+  border-radius: 4px;
+  background: ${({ bg }) => (bg ? bg : "grey")};
+
+  button {
+    cursor: pointer;
+    margin: 0.5rem;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+  }
+`;
+
+export const ButtonCard = ({ clickFn, children }) => (
+  <_ButtonCard>
+    <button onClick={clickFn}>{children}</button>
+  </_ButtonCard>
+);

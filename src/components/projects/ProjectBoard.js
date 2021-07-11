@@ -1,18 +1,21 @@
 import React, { useCallback, useState } from "react";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
-import { ProjectCard, ProjectContainer } from "./styles";
+import { ButtonCard, ButtonRow, ProjectContainer } from "./styles";
 import update from "immutability-helper";
 import { config } from "../../config";
+import { useCounter } from "../../hooks/useCounter";
 
 export const ProjectBoard = (props) => {
   const configs = config();
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
 
   const [projects, setProjects] = useState({
-    a: { top: 0, left: 0, title: "Project A" },
-    b: { top: 40, left: 40, title: "Project B" },
+    a: { top: 100, left: 60, lastDropped: 0, title: "Project A" },
+    b: { top: 40, left: 40, lastDropped: 1, title: "Project B" },
   });
+
+  const dropCounter = useCounter(Object.keys(projects).length);
 
   const addProject = useCallback(() => {
     setDynamicProjectCount(dynamicProjectCount + 1);
@@ -21,17 +24,18 @@ export const ProjectBoard = (props) => {
       ...projects,
       [project]: {
         top: 10,
-        left: -40 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        left: 0 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        lastDropped: dropCounter(),
         title: project,
       },
     });
   }, [projects, setProjects, dynamicProjectCount, configs]);
 
   const moveProject = useCallback(
-    (id, left, top) => {
+    (id, left, top, lastDropped) => {
       setProjects(
         // shorthand way of updating immutable data properly
-        update(projects, { [id]: { $merge: { left, top } } })
+        update(projects, { [id]: { $merge: { left, top, lastDropped } } })
       );
     },
     [projects, setProjects]
@@ -44,8 +48,7 @@ export const ProjectBoard = (props) => {
         const delta = monitor.getDifferenceFromInitialOffset();
         const left = Math.round(item.left + delta.x);
         const top = Math.round(item.top + delta.y);
-        // TODO clamping
-        moveProject(item.id, left, top);
+        moveProject(item.id, left, top, dropCounter());
         // TODO look at the useDrop docs for why this is here
         return undefined;
       },
@@ -53,52 +56,36 @@ export const ProjectBoard = (props) => {
     [moveProject]
   );
 
+  const byLastDropped = (itemA, itemB) => itemA.lastDropped > itemB.lastDropped;
+
   return (
-    <div>
+    <>
       <ProjectContainer ref={drop}>
         {Object.keys(projects).map((key) => {
           // all four of thes colors look groovy with aquamarine
           const colors = ["#DEB8FF", "#F9C453", "#9EB9FF", "#FF9F70"];
           // random colors on each render for now
           const colorIndex = Math.floor(Math.random() * colors.length);
-          const { left, top, title } = projects[key];
+          const { left, top, title, lastDropped } = projects[key];
           return (
             <Project
               key={key}
               id={key}
-              // convert stored relative coords to absolute coords
               left={left}
               top={top}
+              zIndex={parseInt(lastDropped)}
               bg={colors[colorIndex]}
             >
               {title}
             </Project>
           );
         })}
-        {/* TODO extend ProjectCard the right way */}
-        <ProjectCard
-          style={{
-            position: "fixed",
-            bottom: 10,
-            left: 22,
-            background: "grey",
-            height: "2.5rem",
-            width: "10rem",
-            cursor: "copy",
-          }}
-        >
-          <button
-            onClick={addProject}
-            style={{
-              margin: "0.5rem",
-              paddingRight: "1.5rem",
-              paddingLeft: "1.5rem",
-            }}
-          >
-            New Project
-          </button>
-        </ProjectCard>
       </ProjectContainer>
-    </div>
+      <ButtonRow>
+        <ButtonCard bg={"grey"} clickFn={addProject}>
+          New Project
+        </ButtonCard>
+      </ButtonRow>
+    </>
   );
 };
