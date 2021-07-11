@@ -19,6 +19,7 @@ export const ProjectCard = styled.div`
   position: relative;
   width: ${config().site.projectBoard.cardRemWidth}rem;
   height: ${config().site.projectBoard.cardRemHeight}rem;
+  flex-shrink: 0;
 `;
 
 export const ProjectContainer = styled.div`
@@ -32,6 +33,8 @@ export const ProjectContainer = styled.div`
   box-shadow: 0px 2px 2px 2px darkgrey;
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
+  display: flex;
+  flex-flow: row;
 `;
 
 export const ButtonCard = styled.div``;

@@ -12,21 +12,23 @@ export const ProjectBoard = (props) => {
   );
 
   const configs = config();
+  const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
 
-  // HARDCODED PROJECTS
   const [projects, setProjects] = useState({
     a: { top: 0, left: 0, title: "Project A" },
     b: { top: 40, left: 40, title: "Project B" },
   });
-
-  const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
 
   const addProject = useCallback(() => {
     setDynamicProjectCount(dynamicProjectCount + 1);
     const project = `dynamicProject${dynamicProjectCount}`;
     setProjects({
       ...projects,
-      [project]: { top: 10, left: 160, title: project },
+      [project]: {
+        top: 10,
+        left: 50 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        title: project,
+      },
     });
   }, [projects, setProjects, dynamicProjectCount]);
 
@@ -47,6 +49,7 @@ export const ProjectBoard = (props) => {
         const delta = monitor.getDifferenceFromInitialOffset();
         const left = Math.round(item.left + delta.x);
         const top = Math.round(item.top + delta.y);
+        // TODO clamping
         moveProject(item.id, left, top);
         // TODO look at the useDrop docs for why this is here
         return undefined;
