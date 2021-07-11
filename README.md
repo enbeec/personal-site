@@ -12,10 +12,11 @@
 	- [x] picture (github avatar using github username from config)
 	- [x] name
 	- [x] bio
-- [ ] projects section
-	- [ ] dynamic list component
-	- [ ] projects imported from config
+- [x] projects section
+	- [x] dynamic list component
+	- [ ] projects imported from config and rendered dynamically
 - [ ] customize `public/`
+
 
 ## Git Workflow
 

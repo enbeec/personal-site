@@ -1,28 +1,34 @@
-import React, { useState } from "react";
+import React from "react";
 import Collapsible from "react-collapsible";
 import styled, { css } from "styled-components";
 import { config } from "../../config";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
 export const AboutSection = (props) => {
+  const toggleExpanded = () => {
+    props.setExpandedState(!props.expandedState);
+  };
   return (
     <AboutContainer>
       <AvatarContainer>
         <AvatarImage
-          src={`https://github.com/${config.github.username}.png`}
-          alt={`github avatar for user ${config.github.username}`}
+          src={`https://github.com/${config().github.username}.png`}
+          alt={`github avatar for user ${config().github.username}`}
         />
       </AvatarContainer>
       <AboutTextContainer>
-        <AboutName>{config.about.name}</AboutName>
+        <AboutName>{config().about.name}</AboutName>
         <Collapsible
+          onOpen={toggleExpanded}
+          onClose={toggleExpanded}
           trigger={
             <AboutText>
-              {config.about.info} <AboutTextExpandText />
+              {config().about.info}
+              <br /> <AboutTextExpandText />
             </AboutText>
           }
         >
-          <AboutText>{config.about.bio}</AboutText>
+          <AboutText>{config().about.bio}</AboutText>
         </Collapsible>
       </AboutTextContainer>
     </AboutContainer>
@@ -39,11 +45,12 @@ const AboutContainer = styled.div`
   padding-top: 2rem;
   padding-bottom: 2rem;
   min-width: 30rem;
+  box-shadow: 0px 0px 1px 1px darkgrey;
 `;
 
 const AboutTextContainer = styled.div`
-  padding-left: 2rem;
-  padding-right: 2rem;
+  padding-left: 4rem;
+  padding-right: 8rem;
   display: flex;
   flex-flow: column;
   justify-content: space-around;
@@ -70,6 +77,9 @@ const AboutText = styled.div`
 `;
 
 const AboutTextExpandText = styled.span`
+  color: darkgrey;
+  margin-left: 4rem;
+  margin-right: 4rem;
   ${AboutText}:hover & {
     ::after {
       content: "... click to show/hide...";
@@ -78,7 +88,7 @@ const AboutTextExpandText = styled.span`
 `;
 
 const AvatarContainer = styled.div`
-  margin-top: 4rem;
+  margin-top: 1rem;
   margin-left: 2rem;
   box-sizing: border-box;
   border-radius: 50%;

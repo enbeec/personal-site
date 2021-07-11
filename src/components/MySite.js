@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { AboutSection } from "./about/AboutSection";
-import { ProjectsSection } from "./projects/ProjectsSection";
+import { ProjectBoard } from "./projects/ProjectBoard";
 import { NavBar } from "./nav/NavBar";
 
 export const MySite = (props) => {
+  const [aboutSectionExpanded, setAboutSectionExpanded] = useState(false);
   return (
     <>
       <NavBar />
       <div style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
-        <AboutSection />
+        <AboutSection
+          expandedState={aboutSectionExpanded}
+          setExpandedState={setAboutSectionExpanded}
+        />
       </div>
-      <ProjectsSection />
+      <ProjectBoard watchVars={[aboutSectionExpanded]} />
     </>
   );
 };

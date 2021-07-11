@@ -20,6 +20,7 @@ export const NavBar = (props) => {
 
 const FlexBar = styled.div`
   position: sticky;
+  z-index: 100;
   top: 0;
   background: lightskyblue;
   display: flex;
@@ -30,6 +31,8 @@ const FlexBar = styled.div`
   padding-bottom: 1.6rem;
   margin: 0;
   box-shadow: 0px 2px 2px 2px darkgrey;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
 `;
 
 const BarLink = styled(NavLink)`
@@ -43,24 +46,23 @@ const BarLink = styled(NavLink)`
   box-shadow: 1px 1px 1px 1px black;
   border-top-left-radius: 20px;
   text-decoration: none;
-  transition: transform 500ms;
+
   :link {
     text-decoration: none;
   }
   :visited {
     text-decoration: none;
   }
-  :hover {
-    cursor: pointer;
-  }
-  :active {
-  }
+  cursor: pointer;
+  transition: transform 800ms;
+
   &.activeLink {
     background: lightgrey;
 
-    animation: MoveUpDown 840ms ease-in-out infinite;
+    /* QUESTION can i get this to fire again if the button is clicked? */
+    animation: Bounce 840ms ease-out 3;
 
-    @keyframes MoveUpDown {
+    @keyframes Bounce {
       0%,
       100% {
         transform: translateY(0);
