@@ -16,8 +16,8 @@ export const ProjectCard = styled.div`
     box-shadow: 2px 2px 2px 2px black;
     transform: scale(1.01, 1.01);
   }
-  position: relative;
-  /* position: absolute; */
+  /* position: relative; */
+  position: absolute;
   width: ${config().site.projectBoard.cardRemWidth}rem;
   height: ${config().site.projectBoard.cardRemHeight}rem;
 `;

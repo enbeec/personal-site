@@ -9,21 +9,21 @@ const about = {
   handle: "valcuri",
 };
 
-const site = {};
+const site = {
+  projectBoard: {
+    cardRemWidth: 18,
+    cardRemHeight: 12,
+  },
+};
 
 export const config = () => {
   const c = {
     github,
     about,
-    site: {
-      projectBoard: {
-        cardRemWidth: 18,
-        cardRemHeight: 12,
-      },
-    },
+    site,
   };
-  c.site.projectBoard.cardWidth = rem2px(18);
-  c.site.projectBoard.cardHeight = rem2px(18);
+  c.site.projectBoard.cardWidth = rem2px(site.projectBoard.cardRemWidth);
+  c.site.projectBoard.cardHeight = rem2px(site.projectBoard.cardRemHeight);
   return c;
 };
 

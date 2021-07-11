@@ -1,5 +1,4 @@
 import React, { useCallback, useState, useEffect, useRef } from "react";
-import styled from "styled-components";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
 import { ProjectCard, ProjectContainer } from "./styles";
@@ -16,22 +15,40 @@ export const ProjectBoard = (props) => {
 
   const [coords, setCoords] = useState({
     width: rect.width,
-    left: rect.left,
     height: rect.height,
-    top: rect.top,
-    cardWidth: configs.site.projectBoard.cardWidth,
-    cardHeight: configs.site.projectBoard.cardHeight,
-    cardMaxLeft: rect.width - configs.site.projectBoard.cardWidth,
-    cardMaxTop: rect.height - configs.site.projectBoard.cardHeight,
+    offsetX: rect.left + window.scrollX,
+    offsetY: rect.top + window.scrollY,
+    cardWidth: configs.site.projectBoard.cardRemWidth,
+    cardHeight: configs.site.projectBoard.cardRemHeight,
+    cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
+    cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
   });
+
+  // update coords
+  useEffect(() => {
+    setCoords(
+      update(coords, {
+        $merge: {
+          width: rect.width,
+          height: rect.height,
+          offsetX: rect.left + window.scrollX,
+          offsetY: rect.top + window.scrollY,
+          cardWidth: configs.site.projectBoard.cardRemWidth,
+          cardHeight: configs.site.projectBoard.cardRemHeight,
+          cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
+          cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
+        },
+      })
+    );
+  }, [rect]);
 
   const randomTop = () => Math.random() * coords.cardMaxTop;
   const randomLeft = () => Math.random() * coords.cardMaxLeft;
 
   // HARDCODED PROJECTS
   const [projects, setProjects] = useState({
-    a: { top: 20, left: 180, title: "Project A" },
-    b: { top: 40, left: 120, title: "Project B" },
+    a: { top: 0, left: 0, title: "Project A" },
+    b: { top: 40, left: 40, title: "Project B" },
   });
 
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
@@ -62,31 +79,14 @@ export const ProjectBoard = (props) => {
         const delta = monitor.getDifferenceFromInitialOffset();
         const left = Math.round(item.left + delta.x);
         const top = Math.round(item.top + delta.y);
-        moveProject(item.id, left, top);
+        // translate absolute coords back to relative coords for storage
+        moveProject(item.id, left - coords.offsetX, top - coords.offsetY);
         // TODO look at the useDrop docs for why this is here
         return undefined;
       },
     }),
     [moveProject]
   );
-
-  // WORKSHEET for absolute coord system bounding
-  useEffect(() => {
-    setCoords(
-      update(coords, {
-        $merge: {
-          width: rect.width,
-          left: rect.left,
-          height: rect.height,
-          top: rect.top,
-          cardWidth: configs.site.projectBoard.cardRemWidth,
-          cardHeight: configs.site.projectBoard.cardRemHeight,
-          cardMaxLeft: rect.width - configs.site.projectBoard.cardRemWidth,
-          cardMaxTop: rect.height - configs.site.projectBoard.cardRemHeight,
-        },
-      })
-    );
-  }, [rect]);
 
   return (
     <div ref={sizeRef}>
@@ -101,8 +101,9 @@ export const ProjectBoard = (props) => {
             <Project
               key={key}
               id={key}
-              left={left}
-              top={top}
+              // convert stored relative coords to absolute coords
+              left={left + coords.offsetX}
+              top={top + coords.offsetY}
               bg={colors[colorIndex]}
             >
               {title}
