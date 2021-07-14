@@ -41,13 +41,35 @@ export const AboutText = styled.div`
     `}
 `;
 
-export const AboutTextExpandText = styled.span`
-  color: darkgrey;
+export const TriggerText = styled(AboutText)`
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  /* color is based on lavender */
+  border: 3px inset #d9d9ed;
+  border-radius: 6px;
+  cursor: pointer;
+`;
+
+export const ClickToExpand = styled.span`
+  color: black;
+  ::after {
+    content: "...click to expand...";
+  }
   margin-left: 4rem;
   margin-right: 4rem;
-  ${AboutText}:hover & {
-    ::after {
-      content: "...click to expand...";
+  opacity: 0%;
+  /* transition: opacity 1.2s ease-out; */
+  ${TriggerText}:hover & {
+    animation: flash 1.2s ease-in-out infinite alternate;
+  }
+  @keyframes flash {
+    from {
+      opacity: 0%;
+    }
+    to {
+      opacity: 60%;
     }
   }
 `;

@@ -6,14 +6,15 @@ import {
   AboutText,
   AboutTextContainer,
   AboutName,
-  AboutTextExpandText,
+  ClickToExpand,
   Avatar,
+  TriggerText,
 } from "./styles";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
 export const AboutSection = ({ expandedState, setExpandedState }) => {
   const [config] = useState(getConfig());
-  const [githubUser, setGithubUser] = useState();
+  const [githubUser, setGithubUser] = useState({});
   const [, setRepos] = useState();
 
   useEffect(() => {
@@ -50,12 +51,12 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
           onOpen={toggleExpanded}
           onClose={toggleExpanded}
           trigger={
-            <AboutText>
+            <TriggerText>
               {githubUser?.location && `[${githubUser?.location}] `}
               {/* using \r\n depends on css`white-space: pre-wrap` */}
               {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
-              <br /> <AboutTextExpandText />
-            </AboutText>
+              <br /> <ClickToExpand />
+            </TriggerText>
           }
         >
           <AboutText>{config.about.bio}</AboutText>
