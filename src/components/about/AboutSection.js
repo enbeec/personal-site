@@ -32,36 +32,43 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
   };
 
   return (
-    <AboutContainer>
-      <Avatar
-        src={`https://github.com/${config.github.username}.png`}
-        alt={`github avatar for user ${config.github.username}`}
-      />
-      <AboutTextContainer>
-        <AboutName>
-          {config.about.name}
-          <span style={{ fontSize: "1rem" }}>
-            {" a.k.a. "}
-            <a href={`https://github.com/${config.github.username}`}>
-              {config.github.username}
-            </a>
-          </span>
-        </AboutName>
-        <Collapsible
-          onOpen={toggleExpanded}
-          onClose={toggleExpanded}
-          trigger={
-            <TriggerText>
-              {githubUser?.location && `[${githubUser?.location}] `}
-              {/* using \r\n depends on css`white-space: pre-wrap` */}
-              {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
-              <br /> <ClickToExpand />
-            </TriggerText>
-          }
-        >
-          <AboutText>{config.about.bio}</AboutText>
-        </Collapsible>
-      </AboutTextContainer>
-    </AboutContainer>
+    <div style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
+      <AboutContainer>
+        <Avatar
+          src={`https://github.com/${config.github.username}.png`}
+          alt={`github avatar for user ${config.github.username}`}
+        />
+        <AboutTextContainer>
+          <AboutName>
+            {config.about.name}
+            <span style={{ fontSize: "1rem" }}>
+              {" a.k.a. "}
+              <a href={`https://github.com/${config.github.username}`}>
+                {config.github.username}
+              </a>
+            </span>
+          </AboutName>
+          <Collapsible
+            onOpen={toggleExpanded}
+            onClose={toggleExpanded}
+            trigger={
+              <TriggerText>
+                {githubUser?.location && `[${githubUser?.location}] `}
+                {/* using \r\n depends on css`white-space: pre-wrap` */}
+                {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
+                <br />
+                <ClickToExpand>
+                  {expandedState
+                    ? "...click to collapse..."
+                    : "...click to expand..."}
+                </ClickToExpand>
+              </TriggerText>
+            }
+          >
+            <AboutText>{config.about.bio}</AboutText>
+          </Collapsible>
+        </AboutTextContainer>
+      </AboutContainer>
+    </div>
   );
 };

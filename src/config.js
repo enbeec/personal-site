@@ -1,5 +1,6 @@
 const github = {
   username: "enbeec",
+  displayRepos: ["theresumebook"],
 };
 
 const about = {

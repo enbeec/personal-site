@@ -23,9 +23,13 @@ export const AboutTextContainer = styled.div`
 
 export const AboutName = styled.div`
   font-size: 2rem;
+  padding-left: 1rem;
 `;
 
 export const AboutText = styled.div`
+  padding-top: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   white-space: pre-wrap;
   font-style: Oblique;
   font-size: 1.1rem;
@@ -41,28 +45,39 @@ export const AboutText = styled.div`
     `}
 `;
 
+const flashTime = "1s";
+
 export const TriggerText = styled(AboutText)`
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  /* color is based on lavender */
-  border: 3px inset #d9d9ed;
-  border-radius: 6px;
   cursor: pointer;
+  border-radius: 6px;
+  transition: background 10ms ease-out;
+  :active {
+    background: #a9a9bd;
+  }
+  :hover {
+    animation: flashBG ${flashTime} ease-in-out infinite alternate;
+  }
+  @keyframes flashBG {
+    from {
+      background: #e9e9fd;
+    }
+    to {
+      background: #d9d9ed;
+    }
+  }
 `;
 
 export const ClickToExpand = styled.span`
   color: black;
-  ::after {
-    content: "...click to expand...";
-  }
   margin-left: 4rem;
   margin-right: 4rem;
   opacity: 0%;
   /* transition: opacity 1.2s ease-out; */
   ${TriggerText}:hover & {
-    animation: flash 1.2s ease-in-out infinite alternate;
+    animation: flash ${flashTime} ease-in-out infinite alternate;
   }
   @keyframes flash {
     from {
