@@ -51,9 +51,9 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
           onClose={toggleExpanded}
           trigger={
             <AboutText>
-              {githubUser && `[${githubUser.location}] `}
+              {githubUser?.location && `[${githubUser?.location}] `}
               {/* using \r\n depends on css`white-space: pre-wrap` */}
-              {githubUser && githubUser.bio.replace("|| ", "\r\n")}
+              {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
               <br /> <AboutTextExpandText />
             </AboutText>
           }
