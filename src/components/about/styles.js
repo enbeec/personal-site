@@ -1,4 +1,6 @@
 import styled, { css } from "styled-components";
+import Collapsible from "react-collapsible";
+
 export const AboutContainer = styled.div`
   background: lavender;
   display: flex;
@@ -10,6 +12,11 @@ export const AboutContainer = styled.div`
   padding-bottom: 2rem;
   min-width: 30rem;
   box-shadow: 0px 0px 1px 1px darkgrey;
+`;
+
+export const InsetCollapsible = styled(Collapsible)`
+  border: 3px inset #d9d9ed;
+  border-radius: 6px;
 `;
 
 export const AboutTextContainer = styled.div`
@@ -47,8 +54,8 @@ export const TriggerText = styled(AboutText)`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   /* color is based on lavender */
-  border: 3px inset #d9d9ed;
-  border-radius: 6px;
+  /* border: 3px inset #d9d9ed;
+  border-radius: 6px; */
   cursor: pointer;
 `;
 

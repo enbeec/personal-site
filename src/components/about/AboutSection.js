@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Collapsible from "react-collapsible";
 import { config as getConfig } from "../../config";
 import {
   AboutContainer,
@@ -9,6 +8,7 @@ import {
   ClickToExpand,
   Avatar,
   TriggerText,
+  InsetCollapsible,
 } from "./styles";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
@@ -47,7 +47,7 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
             </a>
           </span>
         </AboutName>
-        <Collapsible
+        <InsetCollapsible
           onOpen={toggleExpanded}
           onClose={toggleExpanded}
           trigger={
@@ -60,7 +60,7 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
           }
         >
           <AboutText>{config.about.bio}</AboutText>
-        </Collapsible>
+        </InsetCollapsible>
       </AboutTextContainer>
     </AboutContainer>
   );
