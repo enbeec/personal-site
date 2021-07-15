@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+
 export const AboutContainer = styled.div`
   background: lavender;
   display: flex;
@@ -10,6 +11,11 @@ export const AboutContainer = styled.div`
   padding-bottom: 2rem;
   min-width: 30rem;
   box-shadow: 0px 0px 1px 1px darkgrey;
+`;
+
+export const InsetBorder = styled.div`
+  border: 3px inset #d9d9ed;
+  border-radius: 6px;
 `;
 
 export const AboutTextContainer = styled.div`
@@ -27,9 +33,10 @@ export const AboutName = styled.div`
 `;
 
 export const AboutText = styled.div`
-  padding-top: 0.5rem;
+  padding-right: 2rem;
   padding-left: 1rem;
-  padding-right: 1rem;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
   white-space: pre-wrap;
   font-style: Oblique;
   font-size: 1.1rem;
@@ -48,8 +55,7 @@ export const AboutText = styled.div`
 const flashTime = "1s";
 
 export const TriggerText = styled(AboutText)`
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
+  padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   cursor: pointer;
   border-radius: 6px;

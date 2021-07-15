@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Collapsible from "react-collapsible";
 import { config as getConfig } from "../../config";
+import Collapsible from "react-collapsible";
 import {
   AboutContainer,
   AboutText,
@@ -9,6 +9,7 @@ import {
   ClickToExpand,
   Avatar,
   TriggerText,
+  InsetBorder,
 } from "./styles";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
@@ -32,22 +33,22 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
   };
 
   return (
-    <div style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
-      <AboutContainer>
-        <Avatar
-          src={`https://github.com/${config.github.username}.png`}
-          alt={`github avatar for user ${config.github.username}`}
-        />
-        <AboutTextContainer>
-          <AboutName>
-            {config.about.name}
-            <span style={{ fontSize: "1rem" }}>
-              {" a.k.a. "}
-              <a href={`https://github.com/${config.github.username}`}>
-                {config.github.username}
-              </a>
-            </span>
-          </AboutName>
+    <AboutContainer>
+      <Avatar
+        src={`https://github.com/${config.github.username}.png`}
+        alt={`github avatar for user ${config.github.username}`}
+      />
+      <AboutTextContainer>
+        <AboutName>
+          {config.about.name}
+          <span style={{ fontSize: "1rem" }}>
+            {" a.k.a. "}
+            <a href={`https://github.com/${config.github.username}`}>
+              {config.github.username}
+            </a>
+          </span>
+        </AboutName>
+        <InsetBorder>
           <Collapsible
             onOpen={toggleExpanded}
             onClose={toggleExpanded}
@@ -67,8 +68,8 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
           >
             <AboutText>{config.about.bio}</AboutText>
           </Collapsible>
-        </AboutTextContainer>
-      </AboutContainer>
-    </div>
+        </InsetBorder>
+      </AboutTextContainer>
+    </AboutContainer>
   );
 };
