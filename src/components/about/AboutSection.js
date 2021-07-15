@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { config as getConfig } from "../../config";
+import Collapsible from "react-collapsible";
 import {
   AboutContainer,
   AboutText,
@@ -8,7 +9,7 @@ import {
   ClickToExpand,
   Avatar,
   TriggerText,
-  InsetCollapsible,
+  InsetBorder,
 } from "./styles";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
@@ -37,6 +38,7 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
         src={`https://github.com/${config.github.username}.png`}
         alt={`github avatar for user ${config.github.username}`}
       />
+
       <AboutTextContainer>
         <AboutName>
           {config.about.name}
@@ -47,20 +49,22 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
             </a>
           </span>
         </AboutName>
-        <InsetCollapsible
-          onOpen={toggleExpanded}
-          onClose={toggleExpanded}
-          trigger={
-            <TriggerText>
-              {githubUser?.location && `[${githubUser?.location}] `}
-              {/* using \r\n depends on css`white-space: pre-wrap` */}
-              {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
-              <br /> <ClickToExpand />
-            </TriggerText>
-          }
-        >
-          <AboutText>{config.about.bio}</AboutText>
-        </InsetCollapsible>
+        <InsetBorder>
+          <Collapsible
+            onOpen={toggleExpanded}
+            onClose={toggleExpanded}
+            trigger={
+              <TriggerText>
+                {githubUser?.location && `[${githubUser?.location}] `}
+                {/* using \r\n depends on css`white-space: pre-wrap` */}
+                {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
+                <br /> <ClickToExpand />
+              </TriggerText>
+            }
+          >
+            <AboutText>{config.about.bio}</AboutText>
+          </Collapsible>
+        </InsetBorder>
       </AboutTextContainer>
     </AboutContainer>
   );

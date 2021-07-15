@@ -14,7 +14,7 @@ export const AboutContainer = styled.div`
   box-shadow: 0px 0px 1px 1px darkgrey;
 `;
 
-export const InsetCollapsible = styled(Collapsible)`
+export const InsetBorder = styled.div`
   border: 3px inset #d9d9ed;
   border-radius: 6px;
 `;
@@ -33,6 +33,10 @@ export const AboutName = styled.div`
 `;
 
 export const AboutText = styled.div`
+  padding-right: 2rem;
+  padding-left: 2rem;
+  padding-top: 0;
+  padding-bottom: 0.5rem;
   white-space: pre-wrap;
   font-style: Oblique;
   font-size: 1.1rem;
@@ -49,13 +53,9 @@ export const AboutText = styled.div`
 `;
 
 export const TriggerText = styled(AboutText)`
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   /* color is based on lavender */
-  /* border: 3px inset #d9d9ed;
-  border-radius: 6px; */
   cursor: pointer;
 `;
 
