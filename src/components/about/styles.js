@@ -34,7 +34,7 @@ export const AboutName = styled.div`
 
 export const AboutText = styled.div`
   padding-right: 2rem;
-  padding-left: 2rem;
+  padding-left: 1rem;
   padding-top: 0;
   padding-bottom: 0.5rem;
   white-space: pre-wrap;
