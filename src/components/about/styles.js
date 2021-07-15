@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import Collapsible from "react-collapsible";
 
 export const AboutContainer = styled.div`
   background: lavender;
