@@ -11,6 +11,8 @@ export const AboutContainer = styled.div`
   padding-bottom: 2rem;
   min-width: 30rem;
   box-shadow: 0px 0px 1px 1px darkgrey;
+  margin-left: 4rem;
+  margin-right: 4rem;
 `;
 
 export const InsetBorder = styled.div`
