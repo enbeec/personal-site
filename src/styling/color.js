@@ -18,4 +18,4 @@ const hexString = (number) => number.toString(16).padStart(2, "0");
 
 // we want a pretty good change of brighter shades
 //	so we add close to 0.5
-const highScale = () => Math.random() + 0.4;
+const highScale = () => Math.random() + 0.7;
