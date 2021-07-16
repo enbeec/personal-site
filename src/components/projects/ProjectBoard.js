@@ -10,8 +10,13 @@ import { UserContext } from "../github/UserProvider";
 export const ProjectBoard = (props) => {
   const configs = config();
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
-  const { user, getRepos, setRepos } = useContext(UserContext);
+  const [projects, setProjects] = useState({
+    a: { top: 30, left: 60, lastDropped: 0, title: "Project A" },
+    b: { top: 70, left: -20, lastDropped: 1, title: "Project B" },
+  });
+  const dropCounter = useCounter(Object.keys(projects).length);
 
+  const { user, getRepos, setRepos } = useContext(UserContext);
   const updateProjectsWithRepos = (repos) => {
     var newProjects = {};
     configs.github.displayRepos.forEach((repoName, index) => {
@@ -40,6 +45,9 @@ export const ProjectBoard = (props) => {
       ...projects,
       ...newProjects,
     });
+    setDynamicProjectCount(
+      dynamicProjectCount + Object.keys(newProjects).length
+    );
   };
 
   useEffect(() => {
@@ -49,13 +57,6 @@ export const ProjectBoard = (props) => {
     });
   }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const [projects, setProjects] = useState({
-    a: { top: 30, left: 60, lastDropped: 0, title: "Project A" },
-    b: { top: 70, left: -20, lastDropped: 1, title: "Project B" },
-  });
-
-  const dropCounter = useCounter(Object.keys(projects).length);
-
   const addProject = useCallback(() => {
     setDynamicProjectCount(dynamicProjectCount + 1);
     const project = `dynamicProject${dynamicProjectCount}`;
@@ -63,7 +64,8 @@ export const ProjectBoard = (props) => {
       ...projects,
       [project]: {
         top: 10,
-        left: 0 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        left:
+          0 - (configs.site.projectBoard.cardWidth + 32) * dynamicProjectCount,
         lastDropped: dropCounter(),
         title: project,
       },
