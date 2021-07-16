@@ -9,8 +9,9 @@ export const Project = ({
   bg,
   zIndex,
   clickFn,
-  text,
   children,
+  text,
+  description,
 }) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -36,16 +37,21 @@ export const Project = ({
       <div
         style={{
           padding: "2rem",
+          paddingRight: "1rem",
+          paddingLeft: "1rem",
           display: "flex",
           flexDirection: "column",
         }}
       >
         <span style={{ fontSize: "1.3rem" }}>{children}</span>
-        <p />
-        {text ? (
-          <p>{text}</p>
+        {text || description ? (
+          <>
+            <p>{text}</p>
+            <p>{description}</p>
+          </>
         ) : (
           <>
+            <p />
             <span>{"top coordinate: " + top}</span>
             <span>{"left coordinate: " + left}</span>
             <span>{"z-index: " + zIndex}</span>

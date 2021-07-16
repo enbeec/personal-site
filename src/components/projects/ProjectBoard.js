@@ -14,17 +14,21 @@ export const ProjectBoard = (props) => {
 
   const updateProjectsWithRepos = (repos) => {
     var newProjects = {};
-    configs.github.displayRepos.map((repoName) => {
+    configs.github.displayRepos.forEach((repoName) => {
       const project = repos.find((repo) => repo.name === repoName);
       // TODO use update()?
       newProjects = {
         ...newProjects,
         [project.name]: {
-          top: 20,
-          left: 10,
+          top: 20 + Math.random() * 20,
+          left: 0 - Math.random() * 30,
           lastDropped: dropCounter(),
           title: project.name,
           text: `A (primarily) ${project.language} project.`,
+          description: project.description,
+          // eventually maybe something like one of these?
+          // isRepo: true,
+          // source: "github",
         },
       };
     });
@@ -39,7 +43,7 @@ export const ProjectBoard = (props) => {
       setRepos(data);
       updateProjectsWithRepos(data);
     });
-  }, [user]);
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [projects, setProjects] = useState({
     a: { top: 100, left: 60, lastDropped: 0, title: "Project A" },
@@ -111,7 +115,8 @@ export const ProjectBoard = (props) => {
           // random colors on each render for now -- kinda fun :)
           const colorIndex = Math.floor(Math.random() * colors.length);
           // this is so handy
-          const { left, top, title, text, lastDropped } = projects[key];
+          const { left, top, title, text, description, lastDropped } =
+            projects[key];
           return (
             <Project
               key={key}
@@ -122,6 +127,7 @@ export const ProjectBoard = (props) => {
               bg={colors[colorIndex]}
               clickFn={incrementZ}
               text={text}
+              description={description}
             >
               {/* this is placeholder content */}
 
