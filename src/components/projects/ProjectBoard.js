@@ -1,21 +1,61 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
 import { ButtonCard, ButtonRow, ProjectContainer } from "./styles";
 import update from "immutability-helper";
 import { config } from "../../config";
 import { useCounter } from "../../hooks/useCounter";
+import { UserContext } from "../github/UserProvider";
 
 export const ProjectBoard = (props) => {
   const configs = config();
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
-
   const [projects, setProjects] = useState({
-    a: { top: 100, left: 60, lastDropped: 0, title: "Project A" },
-    b: { top: 40, left: 40, lastDropped: 1, title: "Project B" },
+    a: { top: 30, left: 60, lastDropped: 0, title: "Project A" },
+    b: { top: 70, left: -20, lastDropped: 1, title: "Project B" },
   });
-
   const dropCounter = useCounter(Object.keys(projects).length);
+
+  const { user, getRepos, setRepos } = useContext(UserContext);
+  const updateProjectsWithRepos = (repos) => {
+    var newProjects = {};
+    configs.github.displayRepos.forEach((repoName, index) => {
+      const project = repos.find((repo) => repo.name === repoName);
+      // TODO use update()?
+      newProjects = {
+        ...newProjects,
+        [project.name]: {
+          top: 20 + Math.random() * 80,
+          left:
+            -30 -
+            Math.random() * 40 -
+            configs.site.projectBoard.cardWidth * index,
+          lastDropped: dropCounter(),
+          title: project.name,
+          text:
+            project.language && `A (primarily) ${project.language} project.`,
+          description: project.description,
+          // eventually maybe something like one of these?
+          // isRepo: true,
+          // source: "github",
+        },
+      };
+    });
+    setProjects({
+      ...projects,
+      ...newProjects,
+    });
+    setDynamicProjectCount(
+      dynamicProjectCount + Object.keys(newProjects).length
+    );
+  };
+
+  useEffect(() => {
+    getRepos().then((data) => {
+      setRepos(data);
+      updateProjectsWithRepos(data);
+    });
+  }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addProject = useCallback(() => {
     setDynamicProjectCount(dynamicProjectCount + 1);
@@ -24,7 +64,8 @@ export const ProjectBoard = (props) => {
       ...projects,
       [project]: {
         top: 10,
-        left: 0 - configs.site.projectBoard.cardWidth * dynamicProjectCount,
+        left:
+          0 - (configs.site.projectBoard.cardWidth + 32) * dynamicProjectCount,
         lastDropped: dropCounter(),
         title: project,
       },
@@ -80,7 +121,8 @@ export const ProjectBoard = (props) => {
           // random colors on each render for now -- kinda fun :)
           const colorIndex = Math.floor(Math.random() * colors.length);
           // this is so handy
-          const { left, top, title, lastDropped } = projects[key];
+          const { left, top, title, text, description, lastDropped } =
+            projects[key];
           return (
             <Project
               key={key}
@@ -90,8 +132,11 @@ export const ProjectBoard = (props) => {
               zIndex={parseInt(lastDropped)}
               bg={colors[colorIndex]}
               clickFn={incrementZ}
+              text={text}
+              description={description}
             >
               {/* this is placeholder content */}
+
               {title}
             </Project>
           );

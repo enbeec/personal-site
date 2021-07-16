@@ -2,7 +2,17 @@ import React from "react";
 import { useDrag } from "react-dnd";
 import { ProjectCard } from "./styles";
 
-export const Project = ({ id, left, top, bg, zIndex, clickFn, children }) => {
+export const Project = ({
+  id,
+  left,
+  top,
+  bg,
+  zIndex,
+  clickFn,
+  children,
+  text,
+  description,
+}) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "project",
@@ -23,20 +33,20 @@ export const Project = ({ id, left, top, bg, zIndex, clickFn, children }) => {
       id={id}
       onClick={clickFn}
     >
-      {/* this div and it's contents are placeholders */}
-      <div
-        style={{
-          padding: "2rem",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <span style={{ fontSize: "1.3rem" }}>{children}</span>
-        <p />
-        <span>{"top coordinate: " + top}</span>
-        <span>{"left coordinate: " + left}</span>
-        <span>{"z-index: " + zIndex}</span>
-      </div>
+      <span style={{ fontSize: "1.3rem" }}>{children}</span>
+      {text || description ? (
+        <>
+          {description && <p>{description}</p>}
+          {text && <p>{text}</p>}
+        </>
+      ) : (
+        <>
+          <p />
+          <span>{"top coordinate: " + top}</span>
+          <span>{"left coordinate: " + left}</span>
+          <span>{"z-index: " + zIndex}</span>
+        </>
+      )}
     </ProjectCard>
   );
 };

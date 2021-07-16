@@ -27,7 +27,7 @@ export const ProjectCard = styled.div`
   background: ${(props) => props.bg};
   border-radius: 2px;
   text-align: center;
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   box-shadow: 1px 1px 1px 1px darkgrey;
   transition: box-shadow 200ms ease-in-out;
   transition: transform 200ms ease-in-out;
@@ -38,8 +38,13 @@ export const ProjectCard = styled.div`
   }
   position: relative;
   width: ${config().site.projectBoard.cardRemWidth}rem;
-  height: ${config().site.projectBoard.cardRemHeight}rem;
+  max-height: ${config().site.projectBoard.cardRemHeight}rem;
+  padding: 1rem;
+  overflow-y: auto;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 export const ButtonRow = styled.div`

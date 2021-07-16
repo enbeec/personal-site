@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { config as getConfig } from "../../config";
 import Collapsible from "react-collapsible";
 import {
@@ -11,26 +11,16 @@ import {
   TriggerText,
   InsetBorder,
 } from "./styles";
+import { UserContext } from "../github/UserProvider";
 
 // see https://github.com/glennflanagan/react-collapsible/blob/develop/example/src/examples/ZeroHeightCollapsible.js
 export const AboutSection = ({ expandedState, setExpandedState }) => {
   const [config] = useState(getConfig());
-  const [githubUser, setGithubUser] = useState({});
-  const [, setRepos] = useState();
+  const { user, setUser, getUser } = useContext(UserContext);
 
   useEffect(() => {
-    fetch(`https://api.github.com/users/${config.github.username}`)
-      .then((res) => res.json())
-      .then(setGithubUser)
-      .then(() => fetch(githubUser?.repos_url))
-      .then((res) => res.json())
-      .then(console.info)
-      .then(setRepos);
-  }, [config]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const toggleExpanded = () => {
-    setExpandedState(!expandedState);
-  };
+    getUser().then((user) => setUser(user));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <AboutContainer>
@@ -38,7 +28,6 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
         src={`https://github.com/${config.github.username}.png`}
         alt={`github avatar for user ${config.github.username}`}
       />
-
       <AboutTextContainer>
         <AboutName>
           {config.about.name}
@@ -51,14 +40,23 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
         </AboutName>
         <InsetBorder>
           <Collapsible
-            onOpen={toggleExpanded}
-            onClose={toggleExpanded}
+            onOpen={() => {
+              setExpandedState(true);
+            }}
+            onClose={() => {
+              setExpandedState(false);
+            }}
             trigger={
               <TriggerText>
-                {githubUser?.location && `[${githubUser?.location}] `}
+                {user?.location && `[${user?.location}] `}
                 {/* using \r\n depends on css`white-space: pre-wrap` */}
-                {githubUser?.bio && githubUser?.bio.replace("|| ", "\r\n")}
-                <br /> <ClickToExpand />
+                {user?.bio && user?.bio.replace("|| ", "\r\n")}
+                <br />
+                <ClickToExpand>
+                  {expandedState
+                    ? "...click to collapse..."
+                    : "...click to expand..."}
+                </ClickToExpand>
               </TriggerText>
             }
           >

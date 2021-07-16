@@ -3,6 +3,7 @@ import { AboutSection } from "./about/AboutSection";
 import { ProjectBoard } from "./projects/ProjectBoard";
 import { NavBar } from "./nav/NavBar";
 import { createGlobalStyle } from "styled-components";
+import { UserProvider } from "./github/UserProvider";
 
 const GlobalStyles = createGlobalStyle`
   body {
@@ -30,14 +31,14 @@ export const MySite = (props) => {
           height: "100%",
         }}
       >
-        <NavBar />
-        <div style={{ paddingLeft: "3rem", paddingRight: "3rem" }}>
+        <UserProvider>
+          <NavBar />
           <AboutSection
             expandedState={aboutSectionExpanded}
             setExpandedState={setAboutSectionExpanded}
           />
-        </div>
-        <ProjectBoard watchVars={[aboutSectionExpanded]} />
+          <ProjectBoard watchVars={[aboutSectionExpanded]} />
+        </UserProvider>
       </div>
     </>
   );

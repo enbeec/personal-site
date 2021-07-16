@@ -11,6 +11,8 @@ export const AboutContainer = styled.div`
   padding-bottom: 2rem;
   min-width: 30rem;
   box-shadow: 0px 0px 1px 1px darkgrey;
+  margin-left: 4rem;
+  margin-right: 4rem;
 `;
 
 export const InsetBorder = styled.div`
@@ -29,6 +31,7 @@ export const AboutTextContainer = styled.div`
 
 export const AboutName = styled.div`
   font-size: 2rem;
+  padding-left: 1rem;
 `;
 
 export const AboutText = styled.div`
@@ -51,24 +54,38 @@ export const AboutText = styled.div`
     `}
 `;
 
+const flashTime = "1s";
+
 export const TriggerText = styled(AboutText)`
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  /* color is based on lavender */
   cursor: pointer;
+  border-radius: 6px;
+  transition: background 10ms ease-out;
+  :active {
+    background: #a9a9bd;
+  }
+  :hover {
+    animation: flashBG ${flashTime} ease-in-out infinite alternate;
+  }
+  @keyframes flashBG {
+    from {
+      background: #e9e9fd;
+    }
+    to {
+      background: #d9d9ed;
+    }
+  }
 `;
 
 export const ClickToExpand = styled.span`
   color: black;
-  ::after {
-    content: "...click to expand...";
-  }
   margin-left: 4rem;
   margin-right: 4rem;
   opacity: 0%;
   /* transition: opacity 1.2s ease-out; */
   ${TriggerText}:hover & {
-    animation: flash 1.2s ease-in-out infinite alternate;
+    animation: flash ${flashTime} ease-in-out infinite alternate;
   }
   @keyframes flash {
     from {
