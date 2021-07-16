@@ -22,10 +22,6 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
     getUser().then((user) => setUser(user));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const toggleExpanded = () => {
-    setExpandedState(!expandedState);
-  };
-
   return (
     <AboutContainer>
       <Avatar
@@ -44,8 +40,12 @@ export const AboutSection = ({ expandedState, setExpandedState }) => {
         </AboutName>
         <InsetBorder>
           <Collapsible
-            onOpen={toggleExpanded}
-            onClose={toggleExpanded}
+            onOpen={() => {
+              setExpandedState(true);
+            }}
+            onClose={() => {
+              setExpandedState(false);
+            }}
             trigger={
               <TriggerText>
                 {user?.location && `[${user?.location}] `}
