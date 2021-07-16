@@ -37,11 +37,25 @@ export const ProjectCard = styled.div`
     transform: scale(1.01, 1.01);
   }
   position: relative;
-  width: ${config().site.projectBoard.cardRemWidth}rem;
+  min-width: ${config().site.projectBoard.cardRemWidth}rem;
+  max-width: ${config().site.projectBoard.cardRemWidth + 8}rem;
   max-height: ${config().site.projectBoard.cardRemHeight}rem;
-  padding: 1rem;
-  overflow-y: auto;
   flex-shrink: 0;
+  padding-top: 0;
+`;
+
+export const TopBar = styled.div`
+  background: darkgrey;
+  margin: 0;
+  justify-self: flex-start;
+  height: 1.2rem;
+  width: auto;
+  flex-shrink: 0;
+  border-spacing: 1px;
+`;
+
+export const TextContainer = styled.div`
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
