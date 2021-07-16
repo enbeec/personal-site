@@ -1,14 +1,45 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
 import { ButtonCard, ButtonRow, ProjectContainer } from "./styles";
 import update from "immutability-helper";
 import { config } from "../../config";
 import { useCounter } from "../../hooks/useCounter";
+import { UserContext } from "../github/UserProvider";
 
 export const ProjectBoard = (props) => {
   const configs = config();
   const [dynamicProjectCount, setDynamicProjectCount] = useState(0);
+  const { user, getRepos, setRepos } = useContext(UserContext);
+
+  const updateProjectsWithRepos = (repos) => {
+    var newProjects = {};
+    configs.github.displayRepos.map((repoName) => {
+      const project = repos.find((repo) => repo.name === repoName);
+      // TODO use update()?
+      newProjects = {
+        ...newProjects,
+        [project.name]: {
+          top: 20,
+          left: 10,
+          lastDropped: dropCounter(),
+          title: project.name,
+          text: `A (primarily) ${project.language} project.`,
+        },
+      };
+    });
+    setProjects({
+      ...projects,
+      ...newProjects,
+    });
+  };
+
+  useEffect(() => {
+    getRepos().then((data) => {
+      setRepos(data);
+      updateProjectsWithRepos(data);
+    });
+  }, [user]);
 
   const [projects, setProjects] = useState({
     a: { top: 100, left: 60, lastDropped: 0, title: "Project A" },
@@ -80,7 +111,7 @@ export const ProjectBoard = (props) => {
           // random colors on each render for now -- kinda fun :)
           const colorIndex = Math.floor(Math.random() * colors.length);
           // this is so handy
-          const { left, top, title, lastDropped } = projects[key];
+          const { left, top, title, text, lastDropped } = projects[key];
           return (
             <Project
               key={key}
@@ -90,8 +121,10 @@ export const ProjectBoard = (props) => {
               zIndex={parseInt(lastDropped)}
               bg={colors[colorIndex]}
               clickFn={incrementZ}
+              text={text}
             >
               {/* this is placeholder content */}
+
               {title}
             </Project>
           );
