@@ -32,6 +32,7 @@ export const ProjectBoard = (props) => {
             configs.site.projectBoard.cardWidth * index,
           lastDropped: dropCounter(),
           title: project.name,
+          url: project.html_url,
           text:
             project.language && `A (primarily) ${project.language} project.`,
           description: project.description,
@@ -121,7 +122,7 @@ export const ProjectBoard = (props) => {
           // random colors on each render for now -- kinda fun :)
           const colorIndex = Math.floor(Math.random() * colors.length);
           // this is so handy
-          const { left, top, title, text, description, lastDropped } =
+          const { left, top, title, text, description, lastDropped, url } =
             projects[key];
           return (
             <Project
@@ -134,11 +135,9 @@ export const ProjectBoard = (props) => {
               clickFn={incrementZ}
               text={text}
               description={description}
-            >
-              {/* this is placeholder content */}
-
-              {title}
-            </Project>
+              title={title}
+              url={url}
+            />
           );
         })}
       </ProjectContainer>

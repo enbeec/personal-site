@@ -1,6 +1,6 @@
 import React from "react";
 import { useDrag } from "react-dnd";
-import { ProjectCard } from "./styles";
+import { TopBar, TextContainer, ProjectCard } from "./styles";
 
 export const Project = ({
   id,
@@ -12,6 +12,8 @@ export const Project = ({
   children,
   text,
   description,
+  title,
+  url,
 }) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -24,6 +26,11 @@ export const Project = ({
     [id, left, top]
   );
 
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
   return (
     <ProjectCard
       ref={drag}
@@ -33,20 +40,31 @@ export const Project = ({
       id={id}
       onClick={clickFn}
     >
-      <span style={{ fontSize: "1.3rem" }}>{children}</span>
-      {text || description ? (
-        <>
-          {description && <p>{description}</p>}
-          {text && <p>{text}</p>}
-        </>
-      ) : (
-        <>
-          <p />
-          <span>{"top coordinate: " + top}</span>
-          <span>{"left coordinate: " + left}</span>
-          <span>{"z-index: " + zIndex}</span>
-        </>
-      )}
+      <TopBar>{title}</TopBar>
+      <TextContainer>
+        <span style={{ fontSize: "1.3rem" }}>{children}</span>
+        {text || description || url ? (
+          <>
+            {description && <p>{description}</p>}
+            {text && <p>{text}</p>}
+            {url && (
+              <button
+                onClick={() => openInNewTab(url)}
+                style={{ justifySelf: "flex-end", alignSelf: "flex-end" }}
+              >
+                Check it out!
+              </button>
+            )}
+          </>
+        ) : (
+          <>
+            <p />
+            <span>{"top coordinate: " + top}</span>
+            <span>{"left coordinate: " + left}</span>
+            <span>{"z-index: " + zIndex}</span>
+          </>
+        )}
+      </TextContainer>
     </ProjectCard>
   );
 };
