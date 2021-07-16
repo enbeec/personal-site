@@ -20,12 +20,13 @@ export const ProjectContainer = styled.div`
   border-top-left-radius: 4px;
   display: flex;
   flex-flow: row;
+  font-size: 1.1rem;
 `;
 
 export const ProjectCard = styled.div`
   ${({ isDragging }) => isDragging && MoveAndShake()}
   background: ${(props) => props.bg};
-  border-radius: 2px;
+  border-radius: 2px 22px 2px 2px;
   text-align: center;
   /* box-sizing: border-box; */
   box-shadow: 1px 1px 1px 1px darkgrey;
@@ -37,25 +38,30 @@ export const ProjectCard = styled.div`
     transform: scale(1.01, 1.01);
   }
   position: relative;
-  min-width: ${config().site.projectBoard.cardRemWidth}rem;
-  max-width: ${config().site.projectBoard.cardRemWidth + 8}rem;
-  max-height: ${config().site.projectBoard.cardRemHeight}rem;
+  min-width: ${config().site.projectBoard.cardRemWidth}em;
+  max-width: ${config().site.projectBoard.cardRemWidth + 8}em;
+  max-height: ${config().site.projectBoard.cardRemHeight}em;
   flex-shrink: 0;
   padding-top: 0;
 `;
 
 export const TopBar = styled.div`
+  border-radius: 2px 22px 0px 0px;
+  font-size: 0.9em;
   background: darkgrey;
   margin: 0;
+  padding-left: 5%;
+  text-align: left;
   justify-self: flex-start;
-  height: 1.2rem;
+  align-self: baseline;
+  height: 1.2em;
   width: auto;
   flex-shrink: 0;
   border-spacing: 1px;
 `;
 
 export const TextContainer = styled.div`
-  padding: 1rem;
+  padding: 1em;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -65,24 +71,24 @@ export const ButtonRow = styled.div`
   display: flex;
   flex-flow: row;
   justify-content: right;
-  padding-right: 0.8rem;
+  padding-right: 0.8em;
 `;
 
 const ButtonCardStyled = styled(ProjectCard)`
-  margin-top: 0.8rem;
-  ${marginX("0.4rem")}
+  margin-top: 0.8em;
+  ${marginX("0.4em")}
   cursor: pointer;
   position: relative;
-  height: 2.5rem;
+  height: 2.5em;
   width: auto;
   border-radius: 4px;
   background: ${({ bg }) => (bg ? bg : "grey")};
 
   button {
     cursor: pointer;
-    margin: 0.5rem;
-    padding-right: 1.5rem;
-    padding-left: 1.5rem;
+    margin: 0.5em;
+    padding-right: 1.5em;
+    padding-left: 1.5em;
   }
 `;
 
