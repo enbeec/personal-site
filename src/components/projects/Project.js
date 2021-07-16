@@ -9,12 +9,10 @@ export const Project = ({
   bg,
   zIndex,
   clickFn,
+  proj,
   children,
-  text,
-  description,
-  title,
-  url,
 }) => {
+  const { text, description, title, url } = proj;
   const [{ isDragging }, drag] = useDrag(
     () => ({
       type: "project",

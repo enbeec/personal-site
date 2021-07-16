@@ -2,10 +2,12 @@ const github = {
   username: "enbeec",
   // last ones go on top
   displayRepos: [
+    "localserve",
     "qmk_firmware",
     "daily-journal",
     "personal-site",
     "theresumebook",
+    "critters",
   ],
 };
 
