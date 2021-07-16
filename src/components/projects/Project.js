@@ -33,31 +33,20 @@ export const Project = ({
       id={id}
       onClick={clickFn}
     >
-      {/* this div and it's contents are placeholders */}
-      <div
-        style={{
-          padding: "2rem",
-          paddingRight: "1rem",
-          paddingLeft: "1rem",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
-        <span style={{ fontSize: "1.3rem" }}>{children}</span>
-        {text || description ? (
-          <>
-            <p>{text}</p>
-            <p>{description}</p>
-          </>
-        ) : (
-          <>
-            <p />
-            <span>{"top coordinate: " + top}</span>
-            <span>{"left coordinate: " + left}</span>
-            <span>{"z-index: " + zIndex}</span>
-          </>
-        )}
-      </div>
+      <span style={{ fontSize: "1.3rem" }}>{children}</span>
+      {text || description ? (
+        <>
+          {description && <p>{description}</p>}
+          {text && <p>{text}</p>}
+        </>
+      ) : (
+        <>
+          <p />
+          <span>{"top coordinate: " + top}</span>
+          <span>{"left coordinate: " + left}</span>
+          <span>{"z-index: " + zIndex}</span>
+        </>
+      )}
     </ProjectCard>
   );
 };

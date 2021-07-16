@@ -1,6 +1,12 @@
 const github = {
   username: "enbeec",
-  displayRepos: ["theresumebook"],
+  // last ones go on top
+  displayRepos: [
+    "qmk_firmware",
+    "daily-journal",
+    "personal-site",
+    "theresumebook",
+  ],
 };
 
 const about = {

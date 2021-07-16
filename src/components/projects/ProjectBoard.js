@@ -14,17 +14,21 @@ export const ProjectBoard = (props) => {
 
   const updateProjectsWithRepos = (repos) => {
     var newProjects = {};
-    configs.github.displayRepos.forEach((repoName) => {
+    configs.github.displayRepos.forEach((repoName, index) => {
       const project = repos.find((repo) => repo.name === repoName);
       // TODO use update()?
       newProjects = {
         ...newProjects,
         [project.name]: {
-          top: 20 + Math.random() * 20,
-          left: 0 - Math.random() * 30,
+          top: 20 + Math.random() * 80,
+          left:
+            -30 -
+            Math.random() * 40 -
+            configs.site.projectBoard.cardWidth * index,
           lastDropped: dropCounter(),
           title: project.name,
-          text: `A (primarily) ${project.language} project.`,
+          text:
+            project.language && `A (primarily) ${project.language} project.`,
           description: project.description,
           // eventually maybe something like one of these?
           // isRepo: true,
@@ -46,8 +50,8 @@ export const ProjectBoard = (props) => {
   }, [user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const [projects, setProjects] = useState({
-    a: { top: 100, left: 60, lastDropped: 0, title: "Project A" },
-    b: { top: 40, left: 40, lastDropped: 1, title: "Project B" },
+    a: { top: 30, left: 60, lastDropped: 0, title: "Project A" },
+    b: { top: 70, left: -20, lastDropped: 1, title: "Project B" },
   });
 
   const dropCounter = useCounter(Object.keys(projects).length);
