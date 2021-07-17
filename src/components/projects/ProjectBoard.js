@@ -26,9 +26,8 @@ export const ProjectBoard = (props) => {
       newProjects = {
         ...newProjects,
         [project.name]: {
-          top: 20 + Math.random() * 80,
-          left:
-            Math.random() * 40 - configs.site.projectBoard.cardWidth * index,
+          top: 20 + index * 100,
+          left: 20 - (configs.site.projectBoard.cardWidth + 100) * index,
           lastDropped: dropCounter(),
           title: project.name,
           url: project.html_url,
