@@ -8,7 +8,7 @@ export const Project = ({
   top,
   bg,
   zIndex,
-  clickFn,
+  clickFunc,
   proj,
   children,
 }) => {
@@ -36,15 +36,15 @@ export const Project = ({
       style={{ left, top, zIndex }}
       bg={bg}
       id={id}
-      onClick={clickFn}
+      onClick={clickFunc}
     >
       <TopBar>{title}</TopBar>
       <TextContainer>
         <span style={{ fontSize: "1.3rem" }}>{children}</span>
         {text || description || url ? (
           <>
-            {description && <p>{description}</p>}
-            {text && <p>{text}</p>}
+            {description && <p children={description} />}
+            {text && <p children={text} />}
             {url && (
               <button
                 onClick={() => openInNewTab(url)}

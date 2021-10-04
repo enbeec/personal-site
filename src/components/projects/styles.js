@@ -92,8 +92,8 @@ const ButtonCardStyled = styled(ProjectCard)`
   }
 `;
 
-export const ButtonCard = ({ clickFn, children }) => (
+export const ButtonCard = ({ clickFunc, children }) => (
   <ButtonCardStyled>
-    <button onClick={clickFn}>{children}</button>
+    <button onClick={clickFunc}>{children}</button>
   </ButtonCardStyled>
 );

@@ -108,7 +108,7 @@ export const ProjectBoard = (props) => {
               top={top}
               zIndex={parseInt(lastDropped)}
               bg={bg}
-              clickFn={incrementZ}
+              clickFunc={incrementZ}
               proj={proj}
             />
           );
