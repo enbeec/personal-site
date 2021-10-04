@@ -12,6 +12,11 @@ import { ButtonRow, ProjectContainer } from "./styles";
 export const StaticBoard = (props) => {
   const dropCounter = useCounter(16);
   // ["#DEB8FF", "#F9C453", "#9EB9FF", "#FF9F70"]
+  //
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
 
   const [cards, setCards] = useState({
     github: {
@@ -25,16 +30,30 @@ export const StaticBoard = (props) => {
         <ul style={{ marginTop: "0rem" }}>
           <li>
             The ResumeBook (
-            <button to="https://github.com/enbeec/theresumebook">Client</button>
+            <button
+              onClick={() =>
+                openInNewTab("https://github.com/enbeec/theresumebook")
+              }
+            >
+              Client
+            </button>
             )
           </li>
           <li>
             RGBlent (
-            <button to="https://github.com/enbeec/rgblent-client">
+            <button
+              onClick={() =>
+                openInNewTab("https://github.com/enbeec/rgblent-client")
+              }
+            >
               client
             </button>{" "}
             and{" "}
-            <button to="https://github.com/enbeec/rgblent-server">
+            <button
+              onClick={() =>
+                openInNewTab("https://github.com/enbeec/rgblent-server")
+              }
+            >
               server
             </button>
             )

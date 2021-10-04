@@ -45,6 +45,13 @@ export const StaticCard = ({
         {description && <p style={{ textAlign: "center" }}>{description}</p>}
         {children}
         {text && <p children={text} />}
+        {url && (
+          <button
+            style={{ fontSize: "1.3rem", width: "4rem", marginLeft: "80%" }}
+            onClick={() => openInNewTab(url)}
+            children="Go"
+          />
+        )}
       </TextContainer>
     </STATIC_CARD>
   );
