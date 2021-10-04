@@ -47,7 +47,7 @@ export const ProjectCard = styled.div`
 
 export const TopBar = styled.div`
   border-radius: 2px 22px 0px 0px;
-  font-size: 0.9em;
+  font-size: ${(props) => (props.size ? props.size : 0.9)}em;
   background: darkgrey;
   margin: 0;
   padding-left: 5%;
@@ -62,6 +62,7 @@ export const TopBar = styled.div`
 
 export const TextContainer = styled.div`
   padding: 1em;
+  padding-top: 0.4em;
   display: flex;
   flex-direction: column;
   justify-content: center;

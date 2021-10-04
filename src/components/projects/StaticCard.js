@@ -1,8 +1,10 @@
 import React from "react";
+import styled from "styled-components";
 import { useDrag } from "react-dnd";
-import { TopBar, TextContainer, ProjectCard } from "./styles";
+import { TopBar, TextContainer } from "./styles";
+import { MoveAndShake } from "../../styling/animations";
 
-export const Project = ({
+export const StaticCard = ({
   id,
   left,
   top,
@@ -29,8 +31,10 @@ export const Project = ({
     if (newWindow) newWindow.opener = null;
   };
 
+  const descriptionParagraphs = description.split("<p>");
+
   return (
-    <ProjectCard
+    <STATIC_CARD
       ref={drag}
       isDragging={isDragging}
       style={{ left, top, zIndex }}
@@ -40,8 +44,9 @@ export const Project = ({
     >
       <TopBar>{title}</TopBar>
       <TextContainer>
-        <span style={{ fontSize: "1.3rem" }}>{children}</span>
-        {description && <p children={description} />}
+        {children}
+        {description &&
+          descriptionParagraphs.map((str) => <p children={str} />)}
         {text && <p children={text} />}
         {url && (
           <button
@@ -52,6 +57,26 @@ export const Project = ({
           </button>
         )}
       </TextContainer>
-    </ProjectCard>
+    </STATIC_CARD>
   );
 };
+
+const STATIC_CARD = styled.div`
+  position: relative;
+  border-radius: 2px 22px 2px 2px;
+  ${({ isDragging }) => isDragging && MoveAndShake()}
+  :hover {
+    box-shadow: 2px 2px 2px 2px black;
+    transform: scale(1.01, 1.01);
+  }
+  transition: box-shadow 200ms ease-in-out;
+  transition: transform 200ms ease-in-out;
+  cursor: ${({ isDragging }) => (isDragging ? "grabbing" : "grab")};
+  background: ${(props) => props.bg};
+  margin: auto;
+  margin-top: 0;
+  padding-top: 0;
+  flex-shrink: 0;
+  box-shadow: 1px 1px 1px 1px darkgrey;
+  max-width: 22%;
+`;

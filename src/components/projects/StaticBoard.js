@@ -2,6 +2,8 @@ import React, { useState, useCallback } from "react";
 import update from "immutability-helper";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
+import { StaticCard } from "./StaticCard";
+import { CoordCard } from "./CoordCard";
 import { useCounter } from "../../hooks/useCounter";
 import { useRandomUnique } from "../../hooks/useRandomUnique";
 import { randomShadeOf } from "../../styling/color";
@@ -18,8 +20,8 @@ export const StaticBoard = (props) => {
       lastDropped: 14,
       title: "My GitHub",
       url: "https://github.com/enbeec",
-      text: "test text",
-      description: "description",
+      text: "",
+      description: `Check out my Nashville Software School capstones: <p> theresumebook <p> RGBlent (rgblent-client and rgblent-server)`,
       bg: "#DEB8FF",
     },
     0: { top: 60, left: 60, lastDropped: 15, bg: "#9EB9FF" },
@@ -66,7 +68,7 @@ export const StaticBoard = (props) => {
 
   return (
     <ProjectContainer ref={drop}>
-      <Project
+      <StaticCard
         id="github"
         left={cards.github.left}
         top={cards.github.top}
@@ -75,15 +77,16 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.github}
       />
-      <Project
-        id={0}
-        left={cards[0].left}
-        top={cards[0].top}
-        zIndex={parseInt(cards[0].lastDropped)}
-        bg={cards[0].bg}
-        clickFunc={incrementZ}
-        proj={cards[0]}
-      />
+      {process.env.NODE_ENV !== "production" && (
+        <CoordCard
+          id={0}
+          left={cards[0].left}
+          top={cards[0].top}
+          zIndex={parseInt(cards[0].lastDropped)}
+          bg={cards[0].bg}
+          clickFunc={incrementZ}
+        />
+      )}
     </ProjectContainer>
   );
 };
