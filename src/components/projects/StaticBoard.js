@@ -20,8 +20,27 @@ export const StaticBoard = (props) => {
       lastDropped: 14,
       title: "My GitHub",
       url: "https://github.com/enbeec",
-      text: "",
-      description: `Check out my Nashville Software School capstones: <p> theresumebook <p> RGBlent (rgblent-client and rgblent-server)`,
+      description: `Check out my Nashville Software School capstones: `,
+      children: (
+        <ul style={{ marginTop: "0rem" }}>
+          <li>
+            The ResumeBook (
+            <button to="https://github.com/enbeec/theresumebook">Client</button>
+            )
+          </li>
+          <li>
+            RGBlent (
+            <button to="https://github.com/enbeec/rgblent-client">
+              client
+            </button>{" "}
+            and{" "}
+            <button to="https://github.com/enbeec/rgblent-server">
+              server
+            </button>
+            )
+          </li>
+        </ul>
+      ),
       bg: "#DEB8FF",
     },
     0: { top: 60, left: 60, lastDropped: 15, bg: "#9EB9FF" },
@@ -76,6 +95,7 @@ export const StaticBoard = (props) => {
         bg={cards.github.bg}
         clickFunc={incrementZ}
         proj={cards.github}
+        children={cards.github.children}
       />
       {process.env.NODE_ENV !== "production" && (
         <CoordCard

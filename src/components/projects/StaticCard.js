@@ -31,8 +31,6 @@ export const StaticCard = ({
     if (newWindow) newWindow.opener = null;
   };
 
-  const descriptionParagraphs = description.split("<p>");
-
   return (
     <STATIC_CARD
       ref={drag}
@@ -44,18 +42,9 @@ export const StaticCard = ({
     >
       <TopBar>{title}</TopBar>
       <TextContainer>
+        {description && <p style={{ textAlign: "center" }}>{description}</p>}
         {children}
-        {description &&
-          descriptionParagraphs.map((str) => <p children={str} />)}
         {text && <p children={text} />}
-        {url && (
-          <button
-            onClick={() => openInNewTab(url)}
-            style={{ justifySelf: "flex-end", alignSelf: "flex-end" }}
-          >
-            Check it out!
-          </button>
-        )}
       </TextContainer>
     </STATIC_CARD>
   );
