@@ -7,12 +7,19 @@ export const NavBar = (props) => {
       <BarLink activeClassName={"activeLink"} to={"/"} exact>
         Home
       </BarLink>
-      <BarLink activeClassName={"activeLink"} to={"/blog"}>
+      <BarLink
+        disabled={true}
+        activeClassName={"activeLink"}
+        to={"/blog"}
+        onClick={(e) => e.preventDefault()}
+      >
         Blog
       </BarLink>
+      {/*
       <BarLink activeClassName={"activeLink"} to={"/links"}>
         Links
-      </BarLink>
+		  </BarLink>
+	  */}
     </FlexBar>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { AboutSection } from "./about/AboutSection";
 import { ProjectBoard } from "./projects/ProjectBoard";
+import { StaticBoard } from "./projects/StaticBoard";
 import { NavBar } from "./nav/NavBar";
 import { createGlobalStyle } from "styled-components";
 import { UserProvider } from "./github/UserProvider";
@@ -37,7 +38,7 @@ export const MySite = (props) => {
             expandedState={aboutSectionExpanded}
             setExpandedState={setAboutSectionExpanded}
           />
-          <ProjectBoard watchVars={[aboutSectionExpanded]} />
+          <StaticBoard watchVars={[aboutSectionExpanded]} />
         </UserProvider>
       </div>
     </>
