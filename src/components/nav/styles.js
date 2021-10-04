@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { NavLink } from "react-router-dom";
 import { Bounce } from "../../styling/animations";
 
@@ -40,8 +40,13 @@ export const BarLink = styled(NavLink)`
   cursor: pointer;
   transition: transform 800ms;
 
-  &.activeLink {
-    background: lightgrey;
-    ${Bounce("840ms", "3")}
-  }
+  ${(props) =>
+    props.disabled
+      ? css``
+      : css`
+          &.activeLink {
+            background: lightgrey;
+            ${Bounce("840ms", "3")}
+          }
+        `}
 `;
