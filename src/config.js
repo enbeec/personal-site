@@ -13,7 +13,25 @@ const github = {
 
 const about = {
   name: "Val Currie",
-  bio: `Thanks for stopping by! The site is still under construction, as I'm sure you can tell. \r\n Ut officia incididunt proident adipisicing eu eiusmod occaecat ea. Voluptate sunt est excepteur amet incididunt tempor voluptate incididunt dolor dolor. Eiusmod mollit mollit duis magna ipsum culpa ut ullamco tempor aute do voluptate occaecat. Ullamco eiusmod duis nostrud duis est est est do quis officia dolore cupidatat. Pariatur ad ad commodo nulla elit ipsum elit reprehenderit. Nostrud sunt est labore reprehenderit ipsum. Ex ipsum sit labore pariatur amet et aliquip aliquip est. Culpa reprehenderit occaecat sint voluptate officia non in. Ea officia consectetur officia mollit incididunt officia ea in exercitation aliquip velit deserunt esse. Ut eu cillum dolor velit laborum sit dolore nisi sunt. Fugiat id elit excepteur dolore pariatur cillum officia. Ipsum laborum laborum proident enim Lorem eiusmod sint eu sint. Tempor occaecat Lorem ad consectetur esse consectetur velit. Dolore consequat labore proident veniam nostrud cillum consequat excepteur. Consectetur excepteur culpa ex dolore. Fugiat proident qui eiusmod enim mollit quis ex officia sit ea cillum anim minim.`,
+  bio: `tl;dr -- avid learner with extra-full-stack experience (networking, hardware, operating systems, infrastructure in addition to application-layer experience) that goes beyond my professional training in web development.
+
+--- The Full Story ---
+
+> The year is 2001 and a tiny, tiny Val is typing "ipconfig /?" into
+> something called "cmd" on the family Compaq running Windows 95.
+> She doesn't know what any of it means, but the awakening has begun.
+
+In the 20 years since I first discovered the beautiful, information rich internals of modern operating systems I've picked up quite a few skills:
+
+- I think infrastructure is really neat and have dabbled with orchestration and deployment pipelines in my personal time. I would love to try my hand at DevOps!
+
+- Having pestered my parents into signing me up for violin lessons around the same time I started using the computer and those skills have merged in the last 5-6 years. I produce music using a variety of electronics and am comfortable with the theory behind sound and digital audio.
+
+- I am familiar with a variety of operating systems -- I have over a decade of experience with both MacOS and Windows but am most interested in open source offerings, namely FreeBSD, a little OpenBSD and lots of time with Debian-based Linux distros like Ubuntu. Oh, and I've been playing with MUSL/non-GNU Linuxes lately (namely Alpine Linux)!
+
+- Throughout the years, I've spent time playing with microcontrollers like the ESP32/ESP8266, Arduino UNO and the Teensy 32bit line. Most of what I do there is more artistic but I also have some experience with technologies like MQTT that fit more IoT-like applications.
+
+- I know enough about networking to be dangerous and host some services on a private network. I know what the network layers are and even how a few of them work.`,
   handle: "valcuri",
 };
 
