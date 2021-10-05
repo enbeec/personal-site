@@ -75,4 +75,5 @@ const STATIC_CARD = styled.div`
   flex-shrink: 0;
   box-shadow: 1px 1px 1px 1px darkgrey;
   max-width: 22%;
+  font-style: normal;
 `;

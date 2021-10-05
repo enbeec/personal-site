@@ -40,7 +40,7 @@ export const AboutText = styled.div`
   padding-top: 0;
   padding-bottom: 0.5rem;
   white-space: pre-wrap;
-  font-style: Oblique;
+  font-style: oblique;
   font-size: 1.1rem;
   ${(props) =>
     props.right &&
