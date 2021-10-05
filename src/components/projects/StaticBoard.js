@@ -21,7 +21,38 @@ export const StaticBoard = (props) => {
   const openRepo = (repoName) =>
     openInNewTab(`https://github.com/enbeec/${repoName}`);
 
+  const RGBlentScreenShotDemo =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1-demoday-screenshot.png";
+  const RGBlentScreenShotNoSidebar =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1.1-screenshot-nosidebar.png";
+  const LissaDemoCroppedGIF =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/lissa-demo-cropped.gif";
+
   const [cards, setCards] = useState({
+    lissaDemo: {
+      top: 20,
+      left: 20,
+      lastDropped: 16,
+      bg: "#F9C453",
+      title: "Lissajous Scales Demo",
+      description: "Teensy 3.6 + OLED Arduino sketch",
+      text: "one big C++ file named .ino",
+      children: <img src={LissaDemoCroppedGIF} />,
+    },
+    rgblentDemo: {
+      top: 50,
+      left: 0,
+      lastDropped: 18,
+      bg: "#9EB9FF",
+      title: "RGBlent Demo",
+      description: "a 2 week sprint to MVP",
+      text: "circa (CIELAB) 2021",
+      children: (
+        <div style={{ display: "flex" }}>
+          <img src={RGBlentScreenShotDemo} style={{ width: "100%" }} />
+        </div>
+      ),
+    },
     github: {
       top: 20,
       left: 20,
@@ -99,6 +130,27 @@ export const StaticBoard = (props) => {
         proj={cards.github}
         children={cards.github.children}
       />
+      <StaticCard
+        id="lissaDemo"
+        left={cards.lissaDemo.left}
+        top={cards.lissaDemo.top}
+        zIndex={parseInt(cards.lissaDemo.lastDropped)}
+        bg={cards.lissaDemo.bg}
+        clickFunc={incrementZ}
+        proj={cards.lissaDemo}
+        children={cards.lissaDemo.children}
+      />
+      <StaticCard
+        id="rgblentDemo"
+        left={cards.rgblentDemo.left}
+        top={cards.rgblentDemo.top}
+        zIndex={parseInt(cards.rgblentDemo.lastDropped)}
+        bg={cards.rgblentDemo.bg}
+        clickFunc={incrementZ}
+        proj={cards.rgblentDemo}
+        children={cards.rgblentDemo.children}
+      />
+
       {process.env.NODE_ENV !== "production" && (
         <CoordCard
           id={0}
