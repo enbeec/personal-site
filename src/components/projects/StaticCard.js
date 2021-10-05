@@ -44,7 +44,7 @@ export const StaticCard = ({
       <TextContainer>
         {description && <p style={{ textAlign: "center" }}>{description}</p>}
         {children}
-        {text && <p children={text} />}
+        {typeof text === "string" ? <p children={text} /> : text}
         {url && (
           <button
             style={{ fontSize: "1.3rem", width: "4rem", marginLeft: "80%" }}
@@ -74,7 +74,7 @@ const STATIC_CARD = styled.div`
   padding-top: 0;
   flex-shrink: 0;
   box-shadow: 1px 1px 1px 1px darkgrey;
-  max-width: 22%;
+  max-width: 30%;
   font-style: normal;
 
   @media only screen and (max-width: 600px) {

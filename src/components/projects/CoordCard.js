@@ -12,6 +12,7 @@ export const CoordCard = ({
   zIndex,
   clickFunc,
   children,
+  title,
 }) => {
   const [{ isDragging }, drag] = useDrag(
     () => ({
@@ -33,7 +34,7 @@ export const CoordCard = ({
       id={id}
       onClick={clickFunc}
     >
-      <TopBar />
+      <TopBar>{title}</TopBar>
       <TextContainer>
         <span>{"top coordinate: " + top}</span>
         <span>{"left coordinate: " + left}</span>
