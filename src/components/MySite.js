@@ -5,18 +5,11 @@ import { StaticBoard } from "./projects/StaticBoard";
 import { NavBar } from "./nav/NavBar";
 import { UserProvider } from "./github/UserProvider";
 
-
 export const MySite = (props) => {
   const [aboutSectionExpanded, setAboutSectionExpanded] = useState(false);
   return (
     <>
-      <div
-        style={{
-          // display: "flex",
-          // flexFlow: "column",
-          height: "100%",
-        }}
-      >
+      <div>
         <UserProvider>
           <NavBar />
           <AboutSection

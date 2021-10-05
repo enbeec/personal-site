@@ -11,7 +11,7 @@ export const ProjectContainer = styled.div`
   padding-top: 0;
   padding-bottom: 2rem;
   position: absolute;
-  min-height: 40rem;
+  min-height: 80rem;
   width: 98%;
   height: 100%;
   box-sizing: border-box;
@@ -19,7 +19,7 @@ export const ProjectContainer = styled.div`
   border-top-right-radius: 4px;
   border-top-left-radius: 4px;
   display: flex;
-  flex-flow: row;
+  flex-flow: column;
   font-size: 1.1rem;
 
   @media only screen and (max-width: 600px) {

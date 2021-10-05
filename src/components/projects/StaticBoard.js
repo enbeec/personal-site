@@ -21,10 +21,58 @@ export const StaticBoard = (props) => {
   const openRepo = (repoName) =>
     openInNewTab(`https://github.com/enbeec/${repoName}`);
 
+  const RGBlentScreenShotDemo =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1-demoday-screenshot.png";
+  const RGBlentScreenShotNoSidebar =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1.1-screenshot-nosidebar.png";
+  const LissaDemoCroppedGIF =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/lissa-demo-cropped.gif";
+
   const [cards, setCards] = useState({
+    lissaDemo: {
+      top: -120,
+      left: 100,
+      lastDropped: 16,
+      bg: "#F9C453",
+      title: "Lissajous Scales Demo",
+      description: "Teensy 3.6 + OLED Arduino sketch",
+      text: "one big C++ file named .ino",
+      children: <img src={LissaDemoCroppedGIF} />,
+      url: "https://github.com/enbeec/lissajous-demo",
+    },
+    rgblentDemo: {
+      top: -500,
+      left: 0,
+      lastDropped: 15,
+      bg: "#9EB9FF",
+      title: "RGBlent Demo",
+      description: "a 2 week sprint to MVP",
+      text: (
+        <div
+          style={{
+            margin: "1.2rem",
+            marginTop: "1rem",
+            marginBottom: "0.5rem",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <span>"circa (CIELAB) 2021"</span>
+          <button disabled={true}>Coming Soon!</button>
+        </div>
+      ),
+      children: (
+        <img
+          src={RGBlentScreenShotDemo}
+          style={{
+            width: "100%",
+          }}
+        />
+      ),
+    },
     github: {
       top: 20,
-      left: 20,
+      left: -40,
       lastDropped: 14,
       bg: "#DEB8FF",
       title: "My GitHub",
@@ -45,7 +93,7 @@ export const StaticBoard = (props) => {
         </ul>
       ),
     },
-    0: { top: 60, left: 60, lastDropped: 15, bg: "#9EB9FF" },
+    0: { top: 0, left: 0, lastDropped: 15, bg: "#9EB9FF" },
   });
 
   const moveCard = useCallback(
@@ -89,6 +137,17 @@ export const StaticBoard = (props) => {
 
   return (
     <ProjectContainer ref={drop}>
+      {process.env.NODE_ENV !== "production" && (
+        <CoordCard
+          id={0}
+          left={cards[0].left}
+          top={cards[0].top}
+          zIndex={parseInt(cards[0].lastDropped)}
+          bg={cards[0].bg}
+          clickFunc={incrementZ}
+          title="start"
+        />
+      )}
       <StaticCard
         id="github"
         left={cards.github.left}
@@ -99,6 +158,27 @@ export const StaticBoard = (props) => {
         proj={cards.github}
         children={cards.github.children}
       />
+      <StaticCard
+        id="lissaDemo"
+        left={cards.lissaDemo.left}
+        top={cards.lissaDemo.top}
+        zIndex={parseInt(cards.lissaDemo.lastDropped)}
+        bg={cards.lissaDemo.bg}
+        clickFunc={incrementZ}
+        proj={cards.lissaDemo}
+        children={cards.lissaDemo.children}
+      />
+      <StaticCard
+        id="rgblentDemo"
+        left={cards.rgblentDemo.left}
+        top={cards.rgblentDemo.top}
+        zIndex={parseInt(cards.rgblentDemo.lastDropped)}
+        bg={cards.rgblentDemo.bg}
+        clickFunc={incrementZ}
+        proj={cards.rgblentDemo}
+        children={cards.rgblentDemo.children}
+      />
+
       {process.env.NODE_ENV !== "production" && (
         <CoordCard
           id={0}
@@ -107,6 +187,7 @@ export const StaticBoard = (props) => {
           zIndex={parseInt(cards[0].lastDropped)}
           bg={cards[0].bg}
           clickFunc={incrementZ}
+          title="end"
         />
       )}
     </ProjectContainer>

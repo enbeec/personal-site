@@ -45,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
     /* border: 2px dotted crimson; */
   }
   html {
-    overflow-y: hidden;
+    overflow-y: scroll;
     height: 100%;
     /* background: black; */
   }
