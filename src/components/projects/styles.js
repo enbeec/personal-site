@@ -58,10 +58,12 @@ export const TopBar = styled.div`
   width: auto;
   flex-shrink: 0;
   border-spacing: 1px;
+  font-style: normal;
 `;
 
 export const TextContainer = styled.div`
   padding: 1em;
+  font-style: normal;
   padding-top: 0.4em;
   display: flex;
   flex-direction: column;

@@ -7,6 +7,55 @@ import { TouchBackend } from "react-dnd-touch-backend";
 import { DndProvider } from "react-dnd";
 import Marquee from "react-fast-marquee";
 // import reportWebVitals from "./reportWebVitals";
+import { createGlobalStyle } from "styled-components";
+import RoutedGothic from "./fonts/routed-gothic.ttf";
+import RoutedGothicItalic from "./fonts/routed-gothic-italic.ttf";
+import RoutedGothicHalfItalic from "./fonts/routed-gothic-half-italic.ttf";
+import RoutedGothicWide from "./fonts/routed-gothic-wide.ttf";
+
+const GlobalStyles = createGlobalStyle`
+	@font-face {
+		font-family: RoutedGothic;
+		src: url(${RoutedGothic});
+	font-style: normal;
+	}
+
+	@font-face {
+		font-family: RoutedGothic;
+		src: url(${RoutedGothicItalic});
+		font-style: italic;
+	}
+
+	@font-face {
+		font-family: RoutedGothic;
+		src: url(${RoutedGothicHalfItalic});
+		font-style: oblique;
+	}
+
+	@font-face {
+		font-family: RoutedGothic;
+		src: url(${RoutedGothicWide}) format("truetype");
+		font-style: 'wide';
+	}
+
+  body {
+    background: white;
+    height: 100%;
+    padding: 8px;
+    /* border: 2px dotted crimson; */
+  }
+  html {
+    overflow-y: hidden;
+    height: 100%;
+    /* background: black; */
+  }
+
+	div, p, button, input, select {
+		font-family: RoutedGothic;
+	}
+
+
+`;
 
 var isMobile = {
   Android: function () {
@@ -56,6 +105,7 @@ ReactDOM.render(
         </Marquee>
       )}
       <DndProvider backend={isMobile.any() ? TouchBackend : HTML5Backend}>
+        <GlobalStyles />
         <MySite />
       </DndProvider>
     </Router>
