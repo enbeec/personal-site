@@ -13,6 +13,11 @@ export const AboutContainer = styled.div`
   box-shadow: 0px 0px 1px 1px darkgrey;
   margin-left: 4rem;
   margin-right: 4rem;
+
+  @media only screen and (max-width: 600px) {
+    margin-left: 0.2rem;
+    max-width: 600px;
+  }
 `;
 
 export const InsetBorder = styled.div`
@@ -109,6 +114,9 @@ const AvatarContainer = styled.div`
   height: auto;
   flex-shrink: 0.6;
   flex-grow: 1;
+  @media only screen and (max-width: 600px) {
+    visibility: hidden;
+  }
 `;
 
 const AvatarImage = styled.img`
@@ -117,6 +125,7 @@ const AvatarImage = styled.img`
   border-radius: 50%;
   width: 100%;
   height: 100%;
+  visibility: inherit;
 `;
 
 export const Avatar = ({ src, alt, ...props }) => (

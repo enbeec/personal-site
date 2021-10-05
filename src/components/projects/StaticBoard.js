@@ -18,11 +18,15 @@ export const StaticBoard = (props) => {
     if (newWindow) newWindow.opener = null;
   };
 
+  const openRepo = (repoName) =>
+    openInNewTab(`https://github.com/enbeec/${repoName}`);
+
   const [cards, setCards] = useState({
     github: {
       top: 20,
       left: 20,
       lastDropped: 14,
+      bg: "#DEB8FF",
       title: "My GitHub",
       url: "https://github.com/enbeec",
       description: `Check out my Nashville Software School capstones: `,
@@ -30,37 +34,16 @@ export const StaticBoard = (props) => {
         <ul style={{ marginTop: "0rem" }}>
           <li>
             The ResumeBook (
-            <button
-              onClick={() =>
-                openInNewTab("https://github.com/enbeec/theresumebook")
-              }
-            >
-              Client
-            </button>
-            )
+            <button onClick={() => openRepo("theresumebook")}>Client</button>)
           </li>
           <li>
             RGBlent (
-            <button
-              onClick={() =>
-                openInNewTab("https://github.com/enbeec/rgblent-client")
-              }
-            >
-              client
-            </button>{" "}
+            <button onClick={() => openRepo("rgblent-client")}>Client</button>{" "}
             and{" "}
-            <button
-              onClick={() =>
-                openInNewTab("https://github.com/enbeec/rgblent-server")
-              }
-            >
-              server
-            </button>
-            )
+            <button onClick={() => openRepo("rgblent-server")}>Server</button>)
           </li>
         </ul>
       ),
-      bg: "#DEB8FF",
     },
     0: { top: 60, left: 60, lastDropped: 15, bg: "#9EB9FF" },
   });

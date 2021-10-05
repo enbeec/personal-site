@@ -76,4 +76,8 @@ const STATIC_CARD = styled.div`
   box-shadow: 1px 1px 1px 1px darkgrey;
   max-width: 22%;
   font-style: normal;
+
+  @media only screen and (max-width: 600px) {
+    max-width: 70%;
+  }
 `;

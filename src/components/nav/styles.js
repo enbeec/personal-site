@@ -17,6 +17,11 @@ export const FlexBar = styled.div`
   box-shadow: 0px 2px 2px 2px darkgrey;
   border-bottom-right-radius: 4px;
   border-bottom-left-radius: 4px;
+  @media only screen and (max-width: 600px) {
+    max-width: 600px;
+    min-width: 489px;
+    width: 100%;
+  }
 `;
 
 export const BarLink = styled(NavLink)`
