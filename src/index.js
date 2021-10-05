@@ -50,11 +50,14 @@ const GlobalStyles = createGlobalStyle`
     /* background: black; */
   }
 
-	div, p, button, input, select {
-		font-family: RoutedGothic;
+  div, p, button, input, select {
+  	font-family: RoutedGothic;
+  }
+
+  ul, li {
+		list-style: none outside none;
+		text-decoration: underline;
 	}
-
-
 `;
 
 var isMobile = {

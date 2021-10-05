@@ -21,6 +21,12 @@ export const ProjectContainer = styled.div`
   display: flex;
   flex-flow: row;
   font-size: 1.1rem;
+
+  @media only screen and (max-width: 600px) {
+    max-width: 600px;
+    min-width: 489px;
+    width: 100%;
+  }
 `;
 
 export const ProjectCard = styled.div`
