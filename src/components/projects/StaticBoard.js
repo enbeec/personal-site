@@ -28,10 +28,13 @@ export const StaticBoard = (props) => {
   const LissaDemoCroppedGIF =
     "https://vcvcvc-dev.us-east-1.linodeobjects.com/lissa-demo-cropped.gif";
 
+	const  TheResumeBook = "https://vcvcvc-dev.us-east-1.linodeobjects.com/theresumebook.png"
+
+
   const [cards, setCards] = useState({
     lissaDemo: {
       top: -120,
-      left: 100,
+      left: 60,
       lastDropped: 16,
       bg: "#F9C453",
       title: "Lissajous Scales Demo",
@@ -41,8 +44,8 @@ export const StaticBoard = (props) => {
       url: "https://github.com/enbeec/lissajous-demo",
     },
     rgblentDemo: {
-      top: -500,
-      left: 0,
+      top: -1000,
+      left: 150,
       lastDropped: 15,
       bg: "#9EB9FF",
       title: "RGBlent Demo",
@@ -70,6 +73,18 @@ export const StaticBoard = (props) => {
         />
       ),
     },
+	theResumeBook: {
+		top: -490,
+		left: -170,
+		lastDropped: 14,
+		bg: "#a8a9ff",
+		title: "The ResumeBook",
+		description: "My first React project!",
+		text: "Sorry, we're keeping the\"the\".",
+		children: (
+			<img src={TheResumeBook} style={{width: "100%"}}/>
+		)
+	},
     github: {
       top: 20,
       left: -40,
@@ -167,6 +182,16 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.lissaDemo}
         children={cards.lissaDemo.children}
+      />
+      <StaticCard
+        id="theResumeBook"
+        left={cards.theResumeBook.left}
+        top={cards.theResumeBook.top}
+        zIndex={parseInt(cards.theResumeBook.lastDropped)}
+        bg={cards.theResumeBook.bg}
+        clickFunc={incrementZ}
+        proj={cards.theResumeBook}
+        children={cards.theResumeBook.children}
       />
       <StaticCard
         id="rgblentDemo"
