@@ -13,6 +13,7 @@ export const StaticCard = ({
   clickFunc,
   proj,
   children,
+  ...props
 }) => {
   const { text, description, title, url } = proj;
   const [{ isDragging }, drag] = useDrag(
@@ -39,6 +40,7 @@ export const StaticCard = ({
       bg={bg}
       id={id}
       onClick={clickFunc}
+	  {...props}
     >
       <TopBar>{title}</TopBar>
       <TextContainer>

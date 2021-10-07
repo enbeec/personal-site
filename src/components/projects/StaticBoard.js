@@ -182,6 +182,7 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.lissaDemo}
         children={cards.lissaDemo.children}
+	    onDoubleClick={() => openInNewTab(LissaDemoCroppedGIF)}
       />
       <StaticCard
         id="theResumeBook"
@@ -192,6 +193,7 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.theResumeBook}
         children={cards.theResumeBook.children}
+	    onDoubleClick={() => openInNewTab(TheResumeBook)}
       />
       <StaticCard
         id="rgblentDemo"
@@ -202,6 +204,7 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.rgblentDemo}
         children={cards.rgblentDemo.children}
+	    onDoubleClick={() => openInNewTab(RGBlentScreenShotDemo)}
       />
 
       {process.env.NODE_ENV !== "production" && (
