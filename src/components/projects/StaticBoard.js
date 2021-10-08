@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from "react";
+import styled from "styled-components";
 import update from "immutability-helper";
 import { useDrop } from "react-dnd";
 import { Project } from "./Project";
@@ -23,18 +24,18 @@ export const StaticBoard = (props) => {
 
   const RGBlentScreenShotDemo =
     "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1-demoday-screenshot.png";
-  const RGBlentScreenShotNoSidebar =
-    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1.1-screenshot-nosidebar.png";
   const LissaDemoCroppedGIF =
     "https://vcvcvc-dev.us-east-1.linodeobjects.com/lissa-demo-cropped.gif";
 
-	const  TheResumeBook = "https://vcvcvc-dev.us-east-1.linodeobjects.com/theresumebook.png"
-
+  const TheResumeBook =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/theresumebook.png";
+  const RGBlentScreenShot =
+    "https://vcvcvc-dev.us-east-1.linodeobjects.com/rgblent-1.1-with-sidebar.png";
 
   const [cards, setCards] = useState({
     lissaDemo: {
       top: -120,
-      left: 60,
+      left: 160,
       lastDropped: 16,
       bg: "#F9C453",
       title: "Lissajous Scales Demo",
@@ -43,27 +44,35 @@ export const StaticBoard = (props) => {
       children: <img src={LissaDemoCroppedGIF} />,
       url: "https://github.com/enbeec/lissajous-demo",
     },
+    rgblentV1: {
+      top: -1830,
+      left: 50,
+      lastDropped: 17,
+      bg: "#e8e9c2",
+      title: "RGBlent Version 1.0",
+      text: (
+        <FlexRow>
+          <span>"circa (CIELAB) 2021"</span>
+          <button disabled={true}>Coming Soon!</button>
+        </FlexRow>
+      ),
+      children: (
+        <img
+          src={RGBlentScreenShot}
+          style={{
+            width: "100%",
+          }}
+        />
+      ),
+    },
     rgblentDemo: {
-      top: -1000,
-      left: 150,
+      top: -800,
+      left: 140,
       lastDropped: 15,
       bg: "#9EB9FF",
       title: "RGBlent Demo",
       description: "a 2 week sprint to MVP",
-      text: (
-        <div
-          style={{
-            margin: "1.2rem",
-            marginTop: "1rem",
-            marginBottom: "0.5rem",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <span>"circa (CIELAB) 2021"</span>
-          <button disabled={true}>Coming Soon!</button>
-        </div>
-      ),
+      text: "shouts out to all my fellow NSS Cohort 48 pals!",
       children: (
         <img
           src={RGBlentScreenShotDemo}
@@ -73,18 +82,16 @@ export const StaticBoard = (props) => {
         />
       ),
     },
-	theResumeBook: {
-		top: -490,
-		left: -170,
-		lastDropped: 14,
-		bg: "#a8a9ff",
-		title: "The ResumeBook",
-		description: "My first React project!",
-		text: "Sorry, we're keeping the\"the\".",
-		children: (
-			<img src={TheResumeBook} style={{width: "100%"}}/>
-		)
-	},
+    theResumeBook: {
+      top: -490,
+      left: -170,
+      lastDropped: 14,
+      bg: "#a8a9ff",
+      title: "The ResumeBook",
+      description: "My first React project!",
+      text: 'Sorry, we\'re keeping the"the".',
+      children: <img src={TheResumeBook} style={{ width: "100%" }} />,
+    },
     github: {
       top: 20,
       left: -40,
@@ -182,7 +189,7 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.lissaDemo}
         children={cards.lissaDemo.children}
-	    onDoubleClick={() => openInNewTab(LissaDemoCroppedGIF)}
+        onDoubleClick={() => openInNewTab(LissaDemoCroppedGIF)}
       />
       <StaticCard
         id="theResumeBook"
@@ -193,7 +200,7 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.theResumeBook}
         children={cards.theResumeBook.children}
-	    onDoubleClick={() => openInNewTab(TheResumeBook)}
+        onDoubleClick={() => openInNewTab(TheResumeBook)}
       />
       <StaticCard
         id="rgblentDemo"
@@ -204,7 +211,18 @@ export const StaticBoard = (props) => {
         clickFunc={incrementZ}
         proj={cards.rgblentDemo}
         children={cards.rgblentDemo.children}
-	    onDoubleClick={() => openInNewTab(RGBlentScreenShotDemo)}
+        onDoubleClick={() => openInNewTab(RGBlentScreenShotDemo)}
+      />
+      <StaticCard
+        id="rgblentV1"
+        left={cards.rgblentV1.left}
+        top={cards.rgblentV1.top}
+        zIndex={parseInt(cards.rgblentV1.lastDropped)}
+        bg={cards.rgblentV1.bg}
+        clickFunc={incrementZ}
+        proj={cards.rgblentV1}
+        children={cards.rgblentV1.children}
+        onDoubleClick={() => openInNewTab(RGBlentScreenShot)}
       />
 
       {process.env.NODE_ENV !== "production" && (
@@ -221,3 +239,10 @@ export const StaticBoard = (props) => {
     </ProjectContainer>
   );
 };
+
+const FlexRow = styled.div`
+  display: flex;
+  flex-flow: row;
+  margin-top: 1rem;
+  justify-content: space-around;
+`;
