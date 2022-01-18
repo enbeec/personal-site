@@ -10,8 +10,6 @@ export const NavBar = () => {
             <BarAnchor
                 activeClassName={"activeLink"}
                 href="https://blog.valcurrie.com"
-                target="_blank"
-                rel="noreferrer"
             >
                 Blog
             </BarAnchor>
