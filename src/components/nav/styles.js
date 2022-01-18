@@ -55,3 +55,35 @@ export const BarLink = styled(NavLink)`
           }
         `}
 `;
+
+export const BarAnchor = styled.a`
+  background: darkgrey;
+  color: black;
+  padding-right: 1.2rem;
+  padding-left: 1.8rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.8rem;
+  border-radius: 10px;
+  box-shadow: 1px 1px 1px 1px black;
+  border-top-left-radius: 20px;
+  text-decoration: none;
+
+  :link {
+    text-decoration: none;
+  }
+  :visited {
+    text-decoration: none;
+  }
+  cursor: pointer;
+  transition: transform 800ms;
+
+  ${(props) =>
+    props.disabled
+      ? css``
+      : css`
+          &.activeLink {
+            background: lightgrey;
+            ${Bounce("840ms", "3")}
+          }
+        `}
+`;
